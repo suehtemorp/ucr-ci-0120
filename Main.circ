@@ -2102,126 +2102,187 @@
     </comp>
     <comp lib="4" loc="(1150,1020)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t0"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1140)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t1"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1260)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t2"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1380)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t3"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1500)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t4"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1620)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t5"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1740)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t6"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,180)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="at"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1860)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t7"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,1980)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s0"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2100)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s1"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2220)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s2"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2340)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s3"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2460)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s4"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2580)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s5"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2700)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s6"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2820)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="s7"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,2940)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t8"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,300)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="v0"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3060)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="t9"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3180)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="k0"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3300)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="k1"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3420)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="gp"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3540)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="sp"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3660)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="fp"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,3780)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="ra"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,420)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="v1"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,540)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="a0"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,660)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="a1"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,780)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="a2"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <comp lib="4" loc="(1150,900)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
+      <a name="label" val="a3"/>
+      <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
     <wire from="(1000,2150)" to="(1000,3910)"/>
