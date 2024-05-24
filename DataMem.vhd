@@ -54,7 +54,10 @@ BEGIN
 		else
 			--
 		end if;
-	data <= cache(to_integer(unsigned(address)));
+		if (MemRead='1') then 
+			data <= cache(to_integer(unsigned(address)));
+		else
+		end if; 
 	
 	else
  
