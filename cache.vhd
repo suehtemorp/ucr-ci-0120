@@ -35,7 +35,7 @@ END cache;
 
 ARCHITECTURE TypeArchitecture OF cache IS
 
-type bloque is array(0 to 8) of std_logic_vector(7 downto 0);
+type bloque is array(0 to 8) of std_logic_vector(10 downto 0);
 type t_set is array(0 to 16) of bloque;
 signal cache0 : t_set;
 
@@ -59,7 +59,7 @@ type t_Memory is array (0 to 31) of std_logic_vector(5 downto 0);
 signal mainmem : t_Memory:= ("000100","000011","000010", "000001", "001000",others =>"000000");
 
 signal dirtys : t_Dirty;
-signal valids : t_valid:= ('1', '1','1','1', others => '1');
+signal valids : t_valid:= ('0', '0','0','0', others => '0');
 signal tags : t_tag:=("10000000000", others => "00000000000");
 
 BEGIN
@@ -78,7 +78,11 @@ process (clock)
 			end if; 
 		else 
 			hit_addr <= '0'; 
-			data <= "000000"; 
+			cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag; 
+			dirtys(to_integer(unsigned(s_index))) <= '1'; 
+			valids(to_integer(unsigned(s_index))) <= '1';
+			tags(to_integer(unsigned(s_index))) <= s_tag;
+			data <= "000000";
 		end if; 
 		
 	end if; 
