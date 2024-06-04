@@ -67,6 +67,9 @@
       <a name="radix" val="16"/>
       <a name="width" val="32"/>
     </comp>
+    <comp lib="0" loc="(350,270)" name="Pin">
+      <a name="appearance" val="classic"/>
+    </comp>
     <comp lib="0" loc="(350,330)" name="Pin">
       <a name="appearance" val="classic"/>
     </comp>
@@ -82,6 +85,9 @@
       <a name="radix" val="16"/>
       <a name="width" val="32"/>
     </comp>
+    <comp loc="(1040,280)" name="classCache">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
     <comp loc="(590,250)" name="cache">
       <a name="appearance" val="logisim_evolution"/>
     </comp>
@@ -90,7 +96,11 @@
     <wire from="(300,310)" to="(370,310)"/>
     <wire from="(350,270)" to="(370,270)"/>
     <wire from="(350,330)" to="(370,330)"/>
+    <wire from="(370,170)" to="(370,250)"/>
+    <wire from="(370,170)" to="(800,170)"/>
     <wire from="(590,250)" to="(690,250)"/>
+    <wire from="(800,170)" to="(800,280)"/>
+    <wire from="(800,280)" to="(820,280)"/>
   </circuit>
   <vhdl name="cache">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -154,15 +164,13 @@ begin
             index &lt;= conv_integer(address(31 downto 24));   -- 8-bit index
             tag &lt;= address(23 downto 0);			     -- 24-bit index
             offset &lt;= address(1 downto 0);				-- 2-bit offset
-
+            
             -- Check for cache hit
             found &lt;= '0';
-            for way in 0 to ASSOCIATIVITY-1 loop
-                if cache(index)(way).valid = '1' and cache(index)(way).tag = tag then
-                    found &lt;= '1';
-                    hit_way &lt;= way;
-                end if;
-            end loop;
+           if cache(index)(way).valid = '1' and cache(index)(way).tag = tag then
+               found &lt;= '1';
+               hit_way &lt;= way;
+           end if;
 
             if found = '1' then
                 -- Cache hit
@@ -185,5 +193,122 @@ begin
         end if;
     end process;
 end Behavioral;
+</vhdl>
+  <vhdl name="classCache">--------------------------------------------------------------------------------
+-- Project :
+-- File    :
+-- Autor   :
+-- Date    :
+--
+--------------------------------------------------------------------------------
+-- Description :
+--
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;  
+
+ENTITY classCache IS
+  PORT (
+  ------------------------------------------------------------------------------
+  --Insert input ports below
+    clock      : IN  std_logic;           
+    Address: IN std_logic_vector(25 DOWNTO 0);
+
+  ------------------------------------------------------------------------------
+	hit : OUT std_logic; 
+	data_out: OUT std_logic_vector(5 DOWNTO 0);
+		tag_out : OUT std_logic_vector (10 DOWNTO 0); 
+		index_out : OUT std_logic_vector (8 DOWNTO 0); 
+		offset_out :OUT std_logic_vector (5 DOWNTO 0);
+	miss_out: OUT std_logic
+    );
+END classCache;
+
+--------------------------------------------------------------------------------
+--Complete your VHDL description below
+--------------------------------------------------------------------------------
+
+ARCHITECTURE TypeArchitecture OF classCache IS
+
+type bloque is array(0 to 63) of std_logic_vector(10 downto 0);
+type t_set is array(0 to 255) of bloque;
+signal cache0 : t_set;
+signal cache1 : t_set; 
+
+type t_tag is array(0 to 255) of std_logic_vector(10 downto 0);
+
+type t_valid is array(0 to 255) of std_logic;
+
+type t_Dirty is array(0 to 255) of std_logic;
+
+
+
+signal s_tag : std_logic_vector(10 downto 0);
+signal s_index :std_logic_vector (8 DOWNTO 0); 
+signal s_offset : std_logic_vector (5 DOWNTO 0); 
+
+signal data: std_logic_vector(5 DOWNTO 0); 
+signal hit_addr : std_logic;
+
+
+type t_Memory is array (0 to 31) of std_logic_vector(5 downto 0);
+signal mainmem : t_Memory:= ("000100","000011","000010", "000001", "001000",others =&gt;"000000");
+
+signal dirtys0 : t_Dirty;
+signal valids0 : t_valid:= ('1', '0','0','0', others =&gt; '0');
+signal tags0 : t_tag:=("10000000000", others =&gt; "00000000000");
+
+signal dirtys1 : t_Dirty;
+signal valids1 : t_valid:= ('1', '0','0','0', others =&gt; '0');
+signal tags1 : t_tag:=("10000000000", others =&gt; "00000000000");
+
+signal miss : std_logic; 
+
+BEGIN
+
+process (clock)
+	begin
+	if clock = '1' then
+		s_tag &lt;= Address(25 DOWNTO 15); 
+		s_index &lt;= Address(14  DOWNTO 6); 
+		s_offset &lt;= Address(5  DOWNTO 0); 
+
+		if valids0(to_integer(unsigned(s_index))) = '1' or valids1(to_integer(unsigned(s_index))) = '1' then 
+			if s_tag = tags0(to_integer(unsigned(s_index))) or s_tag = tags1(to_integer(unsigned(s_index))) then 
+				data &lt;= mainmem(to_integer(unsigned(s_offset))); 
+				hit_addr &lt;= '1'; 
+			end if; 
+		else 
+			hit_addr &lt;= '0'; 
+			if s_tag(0) = '0' then
+				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
+				dirtys0(to_integer(unsigned(s_index))) &lt;= '1'; 
+				valids0(to_integer(unsigned(s_index))) &lt;= '1';
+				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
+			else
+				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
+				dirtys1(to_integer(unsigned(s_index))) &lt;= '1'; 
+				valids1(to_integer(unsigned(s_index))) &lt;= '1';
+				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
+			end if; 
+			miss &lt;= '1'; 
+			hit_addr &lt;= '0'; 
+			
+		end if; 
+		
+	end if; 
+end process;
+
+	tag_out &lt;= s_tag; 
+	index_out &lt;= s_index;
+	offset_out &lt;= s_offset;
+	hit &lt;= hit_addr; 
+	data_out &lt;= data;
+	miss_out &lt;= miss; 
+
+END TypeArchitecture;
 </vhdl>
 </project>
