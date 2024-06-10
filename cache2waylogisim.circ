@@ -56,6 +56,16 @@
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(1110,710)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(1130,570)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+    </comp>
     <comp lib="0" loc="(1140,280)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
@@ -65,6 +75,24 @@
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(1160,830)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="width" val="6"/>
+    </comp>
+    <comp lib="0" loc="(1230,580)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(1250,770)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="width" val="9"/>
     </comp>
     <comp lib="0" loc="(1280,240)" name="Pin">
       <a name="appearance" val="classic"/>
@@ -77,6 +105,12 @@
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
       <a name="width" val="9"/>
+    </comp>
+    <comp lib="0" loc="(1300,680)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="width" val="17"/>
     </comp>
     <comp lib="0" loc="(1380,380)" name="Pin">
       <a name="appearance" val="classic"/>
@@ -124,6 +158,14 @@
       <a name="appearance" val="NewPins"/>
       <a name="width" val="32"/>
     </comp>
+    <comp lib="0" loc="(800,640)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(850,570)" name="Clock"/>
+    <comp loc="(1100,570)" name="cacheLRU">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
     <comp loc="(1110,280)" name="classCache">
       <a name="appearance" val="logisim_evolution"/>
     </comp>
@@ -132,6 +174,14 @@
     </comp>
     <wire from="(1100,300)" to="(1110,300)"/>
     <wire from="(1100,360)" to="(1110,360)"/>
+    <wire from="(1100,570)" to="(1130,570)"/>
+    <wire from="(1100,580)" to="(1100,590)"/>
+    <wire from="(1100,580)" to="(1230,580)"/>
+    <wire from="(1100,610)" to="(1220,610)"/>
+    <wire from="(1100,630)" to="(1210,630)"/>
+    <wire from="(1100,650)" to="(1160,650)"/>
+    <wire from="(1100,670)" to="(1100,710)"/>
+    <wire from="(1100,710)" to="(1110,710)"/>
     <wire from="(1110,280)" to="(1140,280)"/>
     <wire from="(1110,300)" to="(1270,300)"/>
     <wire from="(1110,320)" to="(1430,320)"/>
@@ -140,6 +190,11 @@
     <wire from="(1110,380)" to="(1120,380)"/>
     <wire from="(1120,380)" to="(1120,390)"/>
     <wire from="(1120,390)" to="(1140,390)"/>
+    <wire from="(1160,650)" to="(1160,830)"/>
+    <wire from="(1210,630)" to="(1210,770)"/>
+    <wire from="(1210,770)" to="(1250,770)"/>
+    <wire from="(1220,610)" to="(1220,680)"/>
+    <wire from="(1220,680)" to="(1300,680)"/>
     <wire from="(1270,240)" to="(1270,300)"/>
     <wire from="(1270,240)" to="(1280,240)"/>
     <wire from="(1370,360)" to="(1370,380)"/>
@@ -160,6 +215,10 @@
     <wire from="(790,300)" to="(890,300)"/>
     <wire from="(800,170)" to="(800,280)"/>
     <wire from="(800,280)" to="(890,280)"/>
+    <wire from="(800,640)" to="(870,640)"/>
+    <wire from="(850,570)" to="(880,570)"/>
+    <wire from="(870,590)" to="(870,640)"/>
+    <wire from="(870,590)" to="(880,590)"/>
     <wire from="(890,280)" to="(900,280)"/>
   </circuit>
   <vhdl name="cache">library IEEE;
@@ -255,14 +314,12 @@ begin
 end Behavioral;
 </vhdl>
   <vhdl name="classCache">--------------------------------------------------------------------------------
--- Project :
--- File    :
--- Autor   :
--- Date    :
---
---------------------------------------------------------------------------------
 -- Description :
---
+-- Cache for pipelined MIPS processor. 
+-- 2 way associative.
+-- 32 bit addresses and 32 bit data output. 
+-- Address is divided this way: 
+--  tag is of 10 bits, index is of 8 bits and offset is 5 bits. 
 --------------------------------------------------------------------------------
 
 LIBRARY ieee;
@@ -319,11 +376,11 @@ signal mainmem : t_Memory:= ("00000000000000000000000000000001",others =&gt;"000
 
 signal dirtys0 : t_Dirty;
 signal valids0 : t_valid:= ('1', '0','0','0', others =&gt; '0');
-signal tags0 : t_tag:=("10000000000", others =&gt; "00000000000");
+signal tags0 : t_tag:=( others =&gt; "00000000000");
 
 signal dirtys1 : t_Dirty;
 signal valids1 : t_valid:= ('1', '0','0','0', others =&gt; '0');
-signal tags1 : t_tag:=("10000000000", others =&gt; "00000000000");
+signal tags1 : t_tag:=( others =&gt; "00000000000");
 
 signal miss : std_logic; 
 
@@ -360,6 +417,150 @@ process (clock)
 			
 		end if; 
 		
+	end if; 
+end process;
+
+	tag_out &lt;= s_tag; 
+	index_out &lt;= s_index;
+	offset_out &lt;= s_offset;
+	hit &lt;= hit_addr; 
+	data_out &lt;= data;
+	miss_out &lt;= miss; 
+
+END TypeArchitecture;
+</vhdl>
+  <vhdl name="cacheLRU">--------------------------------------------------------------------------------
+-- Description :
+-- Cache for pipelined MIPS processor. 
+-- 2 way associative.
+-- 32 bit addresses and 32 bit data output. 
+-- Address is divided this way: 
+--  tag is of 10 bits, index is of 8 bits and offset is 5 bits. 
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;  
+
+ENTITY cacheLRU IS
+  PORT (
+  ------------------------------------------------------------------------------
+  --Insert input ports below
+    clock      : IN  std_logic;           
+    Address: IN std_logic_vector(31 DOWNTO 0);
+
+  ------------------------------------------------------------------------------
+	hit : OUT std_logic; 
+	data_out: OUT std_logic_vector(31 DOWNTO 0);
+		tag_out : OUT std_logic_vector (16 DOWNTO 0); 
+		index_out : OUT std_logic_vector (8 DOWNTO 0); 
+		offset_out :OUT std_logic_vector (5 DOWNTO 0);
+	miss_out: OUT std_logic
+    );
+END cacheLRU;
+
+--------------------------------------------------------------------------------
+--Complete your VHDL description below
+--------------------------------------------------------------------------------
+
+ARCHITECTURE TypeArchitecture OF cacheLRU IS
+
+type bloque is array(0 to 63) of std_logic_vector(16 downto 0);
+type t_set is array(0 to 255) of bloque;
+signal cache0 : t_set;
+signal cache1 : t_set; 
+
+type t_tag is array(0 to 255) of std_logic_vector(16 downto 0);
+
+type t_valid is array(0 to 255) of std_logic;
+
+type t_Dirty is array(0 to 255) of std_logic;
+
+type t_LRU is array(0 to 255) of std_logic; 
+
+
+
+signal s_tag : std_logic_vector(16 downto 0);
+signal s_index :std_logic_vector (8 DOWNTO 0); 
+signal s_offset : std_logic_vector (5 DOWNTO 0); 
+
+signal data: std_logic_vector(31 DOWNTO 0); 
+signal hit_addr : std_logic;
+
+
+type t_Memory is array (0 to 31) of std_logic_vector(31 downto 0);
+signal mainmem : t_Memory:= ("00000000000000000000000000000001",others =&gt;"00000000000000000000000000100000");
+
+signal dirtys0 : t_Dirty:= ( others =&gt; '0');
+signal valids0 : t_valid:= ( others =&gt; '0');
+signal tags0 : t_tag:=( others =&gt; "00000000000000000");
+signal lru0: t_LRU:=(others =&gt; '0'); 
+
+signal dirtys1 : t_Dirty:= ( others =&gt; '0');
+signal valids1 : t_valid:= (others =&gt; '0');
+signal tags1 : t_tag:=( others =&gt; "00000000000000000");
+signal lru1: t_LRU:=(others =&gt; '1'); 
+
+
+signal miss : std_logic; 
+
+BEGIN
+
+process (clock)
+	begin
+	if clock = '1' then
+		s_tag &lt;= Address(31 DOWNTO 15); 
+		s_index &lt;= Address(14  DOWNTO 6); 
+		s_offset &lt;= Address(5  DOWNTO 0); 
+		hit_addr &lt;= '0'; 
+		-- Hit logic
+		if valids0(to_integer(unsigned(s_index))) = '1' or valids1(to_integer(unsigned(s_index))) = '1' then 
+			if s_tag = tags0(to_integer(unsigned(s_index))) or s_tag = tags1(to_integer(unsigned(s_index))) then 
+				data &lt;= mainmem(to_integer(unsigned(s_offset))); 
+				hit_addr &lt;= '1'; 
+				miss &lt;= '0';
+			end if; 
+		else		 
+		-- Miss logic
+		-- Ver en que set va a ponerse el dato (si en el 0 o en el 1) 
+			if lru0(to_integer(unsigned(s_index))) = '0' then
+				-- En este caso se escoje el set 0 
+				-- Llenar el arreglo de valid con '1' en la posicion del index 
+				valids0(to_integer(unsigned(s_index))) &lt;= '1';
+				
+				-- Poner el actual lru_0 bit en '1' y cambiar el otro a '0' en el index correspondiente 
+				--lru0(to_integer(unsigned(s_index))) &lt;= '1'; 
+				--lru1(to_integer(unsigned(s_index))) &lt;= '0'; 
+				-- Guardar el tag en cache_0 
+				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+				-- Llenar el arreglo de tags con el tag correspondiente
+				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+				-- Hubo miss 
+				miss &lt;= '1'; 
+				hit_addr &lt;= '0'; 
+			else
+				-- En este caso se escoje el set 1 
+				-- Llenar el arreglo de valid con '1' en la posicion del index 
+				valids1(to_integer(unsigned(s_index))) &lt;= '1';
+				
+				--- Poner el actual lru_0 bit en '1' y cambiar el otro a '0' en el index correspondiente 
+				lru1(to_integer(unsigned(s_index))) &lt;= '1'; 
+				lru0(to_integer(unsigned(s_index))) &lt;= '0'; 
+				-- Guardar el tag en cache_0 
+				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+				-- Llenar el arreglo de tags con el tag correspondiente
+				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+				-- Hubo miss 
+				miss &lt;= '1'; 
+				hit_addr &lt;= '0'; 
+			end if; 	
+					
+		end if; 	
 	end if; 
 end process;
 
