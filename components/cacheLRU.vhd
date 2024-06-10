@@ -83,34 +83,30 @@ process (clock)
 		s_index <= Address(14  DOWNTO 6); 
 		s_offset <= Address(5  DOWNTO 0); 
 		hit_addr <= '0'; 
-		-- Hit logic
+		miss <= '1'; 
 		if valids0(to_integer(unsigned(s_index))) = '1' or valids1(to_integer(unsigned(s_index))) = '1' then 
 			if s_tag = tags0(to_integer(unsigned(s_index))) or s_tag = tags1(to_integer(unsigned(s_index))) then 
 				data <= mainmem(to_integer(unsigned(s_offset))); 
 				hit_addr <= '1'; 
 				miss <= '0';
 			end if; 
-		else		 
-		-- Miss logic
-		-- Ver en que set va a ponerse el dato (si en el 0 o en el 1) 
-			if lru0(to_integer(unsigned(s_index))) = '0' then
+		end if;
+
+		if lru0(to_integer(unsigned(s_index))) = '0' then
 				-- En este caso se escoje el set 0 
 				-- Llenar el arreglo de valid con '1' en la posicion del index 
 				valids0(to_integer(unsigned(s_index))) <= '1';
 				
 				-- Poner el actual lru_0 bit en '1' y cambiar el otro a '0' en el index correspondiente 
-				--lru0(to_integer(unsigned(s_index))) <= '1'; 
-				--lru1(to_integer(unsigned(s_index))) <= '0'; 
+				lru0(to_integer(unsigned(s_index))) <= '1'; 
+				lru1(to_integer(unsigned(s_index))) <= '0';
+				
 				-- Guardar el tag en cache_0 
-				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag;
+				--cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag;
 
 				-- Llenar el arreglo de tags con el tag correspondiente
 				tags0(to_integer(unsigned(s_index))) <= s_tag;
-
-				-- Hubo miss 
-				miss <= '1'; 
-				hit_addr <= '0'; 
-			else
+		else
 				-- En este caso se escoje el set 1 
 				-- Llenar el arreglo de valid con '1' en la posicion del index 
 				valids1(to_integer(unsigned(s_index))) <= '1';
@@ -119,17 +115,14 @@ process (clock)
 				lru1(to_integer(unsigned(s_index))) <= '1'; 
 				lru0(to_integer(unsigned(s_index))) <= '0'; 
 				-- Guardar el tag en cache_0 
-				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag;
+				--cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag;
 
 				-- Llenar el arreglo de tags con el tag correspondiente
 				tags1(to_integer(unsigned(s_index))) <= s_tag;
 
-				-- Hubo miss 
-				miss <= '1'; 
-				hit_addr <= '0'; 
-			end if; 	
-					
-		end if; 	
+		end if; 
+		
+		
 	end if; 
 end process;
 
