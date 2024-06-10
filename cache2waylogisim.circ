@@ -533,7 +533,7 @@ process (clock)
 				lru1(to_integer(unsigned(s_index))) &lt;= '0';
 				
 				-- Guardar el tag en cache_0 
-				--cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
+				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= s_tag;
 
 				-- Llenar el arreglo de tags con el tag correspondiente
 				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
@@ -546,17 +546,13 @@ process (clock)
 				lru1(to_integer(unsigned(s_index))) &lt;= '1'; 
 				lru0(to_integer(unsigned(s_index))) &lt;= '0'; 
 				-- Guardar el tag en cache_0 
-				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
+				--cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= s_tag;
 
 				-- Llenar el arreglo de tags con el tag correspondiente
 				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
 
-				-- Hubo miss 
-				miss &lt;= '1'; 
-				hit_addr &lt;= '0'; 
-			end if; 
-		
 		end if; 
+		
 		
 	end if; 
 end process;

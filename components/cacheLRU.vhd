@@ -102,7 +102,7 @@ process (clock)
 				lru1(to_integer(unsigned(s_index))) <= '0';
 				
 				-- Guardar el tag en cache_0 
-				--cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag;
+				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) <= s_tag;
 
 				-- Llenar el arreglo de tags con el tag correspondiente
 				tags0(to_integer(unsigned(s_index))) <= s_tag;
@@ -115,7 +115,7 @@ process (clock)
 				lru1(to_integer(unsigned(s_index))) <= '1'; 
 				lru0(to_integer(unsigned(s_index))) <= '0'; 
 				-- Guardar el tag en cache_0 
-				--cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) <= s_tag;
+				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) <= s_tag;
 
 				-- Llenar el arreglo de tags con el tag correspondiente
 				tags1(to_integer(unsigned(s_index))) <= s_tag;
