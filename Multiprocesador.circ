@@ -18,8 +18,8 @@
   <lib desc="#BFH-Praktika" name="9"/>
   <lib desc="#Input/Output-Extra" name="10"/>
   <lib desc="#Soc" name="11"/>
-  <lib desc="file#Modulos_Memoria.circ" name="12"/>
-  <lib desc="file#Modulos_MIPS.circ" name="13"/>
+  <lib desc="file#Modulos_MIPS.circ" name="12"/>
+  <lib desc="file#Modulos_Memoria.circ" name="13"/>
   <main name="Main"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
@@ -196,9 +196,9 @@
     <comp lib="1" loc="(440,550)" name="NOT Gate">
       <a name="size" val="20"/>
     </comp>
-    <comp lib="12" loc="(730,400)" name="Four_GB_ROM_Controller"/>
-    <comp lib="12" loc="(730,530)" name="Four_GB_RAM_Controller"/>
-    <comp lib="13" loc="(680,830)" name="MIPS_Processor"/>
+    <comp lib="12" loc="(680,830)" name="MIPS_Processor"/>
+    <comp lib="13" loc="(730,400)" name="Four_GB_ROM_Controller"/>
+    <comp lib="13" loc="(730,530)" name="Four_GB_RAM_Controller"/>
     <comp lib="5" loc="(220,110)" name="DipSwitch">
       <a name="facing" val="east"/>
       <a name="label" val="Opciones"/>
@@ -208,7 +208,7 @@
     <comp lib="5" loc="(220,170)" name="Button">
       <a name="label" val="Encender_MIPS"/>
     </comp>
-    <comp lib="8" loc="(168,748)" name="Text">
+    <comp lib="8" loc="(165,745)" name="Text">
       <a name="color" val="#6aa9cf"/>
       <a name="font" val="SansSerif bold 32"/>
       <a name="text" val="Procesadores"/>
