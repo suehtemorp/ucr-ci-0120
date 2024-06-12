@@ -1509,7 +1509,7 @@
       <a name="showInTab" val="true"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="8" loc="(284,274)" name="Text">
+    <comp lib="8" loc="(280,270)" name="Text">
       <a name="color" val="#03030a"/>
       <a name="font" val="SansSerif bold 30"/>
       <a name="text" val="Entradas y salidas"/>
@@ -1554,6 +1554,8 @@
     </comp>
     <comp loc="(1110,5910)" name="MIPS_Control_Hazard_Solver">
       <a name="appearance" val="evolution"/>
+      <a name="label" val="Corrector_Control_Hazards"/>
+      <a name="labelvisible" val="true"/>
     </comp>
     <comp loc="(1140,5670)" name="MIPS_Data_Hazard_Solver">
       <a name="label" val="Corrector_Data_Hazards"/>
@@ -14472,7 +14474,7 @@ BEGIN&#13;
 	begin
 		-- Si el primer ciclo se está llevando a cabo, reiniciar toda
 		-- la pipeline
-		if (MEM_Salto_Pendiente = '1') then
+		if (Primer_Ciclo = '1') then
 			report "MEM Salto Pendiente";
 			if rising_edge(Reloj) then
 				-- Fijar todas las fases
