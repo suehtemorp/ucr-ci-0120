@@ -4,7 +4,7 @@
 -- 2 way associative.
 -- 32 bit addresses and 32 bit data output. 
 -- Address is divided this way: 
---  tag is of 10 bits, index is of 8 bits and offset is 5 bits. 
+--  tag is of 17 bits, index is of 8 bits and offset is 5 bits. 
 --------------------------------------------------------------------------------
 
 LIBRARY ieee;
