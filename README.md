@@ -1,7 +1,7 @@
 # Descripción entidad de caché
 
 Esta entidad VHDL implementa una caché asociativa de 2 vías para un procesador que utiliza el pipeline de MIPS. Opera con direcciones de 32 bits y datos de salida de 32 bits. 
-Divide la dirección en un tag de 10 bits, un índice de 8 bits y un desplazamiento (offset) de 5 bits. 
+Divide la dirección en un tag de 16 bits, un índice de 8 bits y un desplazamiento (offset) de 5 bits. 
 La caché utiliza la política de reemplazo del menos utilizado recientemente (LRU). 
 
 ## Entidad `cacheLRU`: 
