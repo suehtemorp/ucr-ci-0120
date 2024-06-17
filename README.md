@@ -12,10 +12,14 @@ La caché utiliza la política de reemplazo del menos utilizado recientemente (L
 	- `clock` (std_logic): Señal de reloj 
 	- `Address` (std_logic_vector(31 DOWNTO 0)): Dirección de 32 bits desde el cual se va a leer el dato. 
 
-- **Salidas**:
-	- `hit` (std_logic): Indica si el dato solicitado se encuentra en la caché.
+- **Salidas:**
+  - `hit` (std_logic): Indica si el dato solicitado se encuentra en la caché.
   - `data_out` (std_logic_vector(31 DOWNTO 0)): Dato de 32 bits leído de la caché.
+  - `tag_out` (std_logic_vector(16 DOWNTO 0)): Parte del tag de la dirección de salida.
+  - `index_out` (std_logic_vector(8 DOWNTO 0)): Parte del índice de la dirección de salida.
+  - `offset_out` (std_logic_vector(5 DOWNTO 0)): Parte del desplazamiento de la dirección de salida.
   - `miss_out` (std_logic): Indica si el dato solicitado no se encuentra en la caché.
+
 
 ## Arquitectura:
 
@@ -79,8 +83,10 @@ Realiza los siguientes pasos:
 - En este primer diseño, la caché se implementó para interactuar con una memoria principal simplificada (`mainmem`), que está precargada con datos de ejemplo. 
 - La política de reemplazo LRU asegura que el bloque de caché menos usado recientemente sea reemplazado cuando se carga un nuevo bloque en la caché.
 - Esta implementación asume operaciones de solo lectura y no maneja operaciones de escritura ni actualizaciones de bits de suciedad.
+- Esta implementación es un primer acercamiento al diseño de una cache, por eso las salidas incluyen el desplazamiento (offset), index y el tag. Esto para ver que estaba funcionando de manera correcta. 
 
 ## Mejoras a implementar:
 
 - Implementar políticas de write-back y write-through.
 - Integrar con un modelo de memoria principal
+- Cambiar la interfaz de VHDL para poder integrar con el procesador de pipeline MIPS
