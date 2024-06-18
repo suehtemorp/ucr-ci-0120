@@ -4143,22 +4143,22 @@
       <a name="labelfont" val="SansSerif bold 5"/>
       <a name="width" val="5"/>
     </comp>
-    <comp lib="0" loc="(1150,1330)" name="Constant">
-      <a name="facing" val="north"/>
-      <a name="value" val="0x0"/>
-      <a name="width" val="5"/>
-    </comp>
-    <comp lib="0" loc="(120,810)" name="Tunnel">
+    <comp lib="0" loc="(110,810)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Tipo_Operacion"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="6"/>
     </comp>
-    <comp lib="0" loc="(120,830)" name="Tunnel">
+    <comp lib="0" loc="(110,830)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="Funcion_Aritmetica"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="7"/>
+    </comp>
+    <comp lib="0" loc="(1150,1330)" name="Constant">
+      <a name="facing" val="north"/>
+      <a name="value" val="0x0"/>
+      <a name="width" val="5"/>
     </comp>
     <comp lib="0" loc="(1200,820)" name="Tunnel">
       <a name="facing" val="east"/>
@@ -5574,6 +5574,8 @@
     <wire from="(110,690)" to="(140,690)"/>
     <wire from="(110,700)" to="(130,700)"/>
     <wire from="(110,710)" to="(120,710)"/>
+    <wire from="(110,810)" to="(130,810)"/>
+    <wire from="(110,830)" to="(120,830)"/>
     <wire from="(1100,950)" to="(1100,1190)"/>
     <wire from="(1110,1220)" to="(1110,1240)"/>
     <wire from="(1110,1240)" to="(1210,1240)"/>
@@ -5587,6 +5589,8 @@
     <wire from="(1160,830)" to="(1160,1190)"/>
     <wire from="(1170,810)" to="(1170,1190)"/>
     <wire from="(120,710)" to="(120,720)"/>
+    <wire from="(120,820)" to="(120,830)"/>
+    <wire from="(120,820)" to="(130,820)"/>
     <wire from="(1200,1230)" to="(1210,1230)"/>
     <wire from="(1200,820)" to="(1200,1230)"/>
     <wire from="(1210,1320)" to="(1210,1330)"/>
