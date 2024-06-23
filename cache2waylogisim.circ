@@ -56,10 +56,22 @@
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
+    <comp lib="0" loc="(1110,690)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="set0"/>
+      <a name="output" val="true"/>
+    </comp>
     <comp lib="0" loc="(1110,710)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
-      <a name="label" val="Miss"/>
+      <a name="label" val="set1"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(1120,670)" name="Pin">
+      <a name="appearance" val="classic"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="miss"/>
       <a name="output" val="true"/>
     </comp>
     <comp lib="0" loc="(1130,570)" name="Pin">
@@ -68,7 +80,7 @@
       <a name="label" val="Hit"/>
       <a name="output" val="true"/>
     </comp>
-    <comp lib="0" loc="(1160,830)" name="Pin">
+    <comp lib="0" loc="(1220,830)" name="Pin">
       <a name="appearance" val="classic"/>
       <a name="facing" val="west"/>
       <a name="label" val="Offset"/>
@@ -117,10 +129,12 @@
     <wire from="(1100,580)" to="(1230,580)"/>
     <wire from="(1100,610)" to="(1220,610)"/>
     <wire from="(1100,630)" to="(1210,630)"/>
-    <wire from="(1100,650)" to="(1160,650)"/>
-    <wire from="(1100,670)" to="(1100,710)"/>
+    <wire from="(1100,650)" to="(1190,650)"/>
+    <wire from="(1100,670)" to="(1120,670)"/>
+    <wire from="(1100,690)" to="(1110,690)"/>
     <wire from="(1100,710)" to="(1110,710)"/>
-    <wire from="(1160,650)" to="(1160,830)"/>
+    <wire from="(1190,650)" to="(1190,830)"/>
+    <wire from="(1190,830)" to="(1220,830)"/>
     <wire from="(1210,630)" to="(1210,770)"/>
     <wire from="(1210,770)" to="(1250,770)"/>
     <wire from="(1220,610)" to="(1220,680)"/>
@@ -366,7 +380,9 @@ ENTITY cacheLRU IS
 		tag_out : OUT std_logic_vector (16 DOWNTO 0); 
 		index_out : OUT std_logic_vector (8 DOWNTO 0); 
 		offset_out :OUT std_logic_vector (5 DOWNTO 0);
-	miss_out: OUT std_logic
+	miss_out: OUT std_logic;
+	set_0: OUT std_logic; 
+	set_1: OUT std_logic
     );
 END cacheLRU;
 
@@ -417,6 +433,9 @@ signal lru1: t_LRU:=(others =&gt; '1');
 -- Signal for miss logic
 signal miss : std_logic; 
 
+signal set_0_out: std_logic;
+signal set_1_out : std_logic; 
+
 BEGIN
 -- Process that handles the cache behavior on clock edge
 process (clock)
@@ -453,6 +472,11 @@ process (clock)
 
 				-- Add the tag to tags0 
 				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+				if hit_addr = '0' then 
+					set_1_out &lt;= '0'; 
+					set_0_out &lt;= '1';
+				end if;  
 		else
 				-- Use set 1 
 				valids1(to_integer(unsigned(s_index))) &lt;= '1';
@@ -465,6 +489,11 @@ process (clock)
 
 				-- Add the tag to tags1
 				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
+				
+				if hit_addr = '0' then
+					set_1_out &lt;= '1'; 
+					set_0_out &lt;= '0';
+				end if;  
 		end if; 
 	end if; 
 end process;
@@ -476,6 +505,8 @@ end process;
 	hit &lt;= hit_addr; 
 	data_out &lt;= data;
 	miss_out &lt;= miss; 
+	set_0 &lt;= set_0_out; 
+	set_1 &lt;= set_1_out;
 
 END TypeArchitecture;
 </vhdl>

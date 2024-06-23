@@ -26,7 +26,9 @@ ENTITY cacheLRU IS
 		tag_out : OUT std_logic_vector (16 DOWNTO 0); 
 		index_out : OUT std_logic_vector (8 DOWNTO 0); 
 		offset_out :OUT std_logic_vector (5 DOWNTO 0);
-	miss_out: OUT std_logic
+	miss_out: OUT std_logic;
+	set_0: OUT std_logic; 
+	set_1: OUT std_logic
     );
 END cacheLRU;
 
@@ -77,6 +79,9 @@ signal lru1: t_LRU:=(others => '1');
 -- Signal for miss logic
 signal miss : std_logic; 
 
+signal set_0_out: std_logic;
+signal set_1_out : std_logic; 
+
 BEGIN
 -- Process that handles the cache behavior on clock edge
 process (clock)
@@ -113,6 +118,11 @@ process (clock)
 
 				-- Add the tag to tags0 
 				tags0(to_integer(unsigned(s_index))) <= s_tag;
+
+				if hit_addr = '0' then 
+					set_1_out <= '0'; 
+					set_0_out <= '1';
+				end if;  
 		else
 				-- Use set 1 
 				valids1(to_integer(unsigned(s_index))) <= '1';
@@ -125,6 +135,11 @@ process (clock)
 
 				-- Add the tag to tags1
 				tags1(to_integer(unsigned(s_index))) <= s_tag;
+				
+				if hit_addr = '0' then
+					set_1_out <= '1'; 
+					set_0_out <= '0';
+				end if;  
 		end if; 
 	end if; 
 end process;
@@ -136,5 +151,7 @@ end process;
 	hit <= hit_addr; 
 	data_out <= data;
 	miss_out <= miss; 
+	set_0 <= set_0_out; 
+	set_1 <= set_1_out;
 
 END TypeArchitecture;
