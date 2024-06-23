@@ -11006,7 +11006,7 @@
     </comp>
     <comp lib="0" loc="(990,560)" name="Tunnel">
       <a name="facing" val="east"/>
-      <a name="label" val="WB_Salida_Registro_Fuente"/>
+      <a name="label" val="WB_Salida_Registro_Objetivo"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="32"/>
     </comp>
