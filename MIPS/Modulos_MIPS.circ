@@ -6978,7 +6978,7 @@
     </comp>
     <comp lib="0" loc="(2150,3430)" name="Tunnel">
       <a name="facing" val="south"/>
-      <a name="label" val="Cociente_DIV"/>
+      <a name="label" val="Residuo_DIV"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="32"/>
     </comp>
@@ -7284,7 +7284,7 @@
     </comp>
     <comp lib="0" loc="(2590,3430)" name="Tunnel">
       <a name="facing" val="south"/>
-      <a name="label" val="Residuo_DIV"/>
+      <a name="label" val="Cociente_DIV"/>
       <a name="labelfont" val="SansSerif bold 10"/>
       <a name="width" val="32"/>
     </comp>
