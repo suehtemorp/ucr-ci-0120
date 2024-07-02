@@ -58,28 +58,57 @@
     <a name="circuit" val="Main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(100,900)" name="Tunnel">
+    <comp lib="0" loc="(100,1000)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="ROM_Word"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(1130,820)" name="Tunnel">
+    <comp lib="0" loc="(1050,920)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="MIPS_Granularidad_Memoria"/>
+      <a name="width" val="2"/>
+    </comp>
+    <comp lib="0" loc="(1080,610)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="RAM_Nibble"/>
+      <a name="width" val="16"/>
+    </comp>
+    <comp lib="0" loc="(1180,610)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="RAM_Byte"/>
+      <a name="width" val="8"/>
+    </comp>
+    <comp lib="0" loc="(120,710)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="MIPS_Entrada_RAM"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(1230,920)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="MIPS_Escribir"/>
     </comp>
-    <comp lib="0" loc="(120,600)" name="Tunnel">
-      <a name="facing" val="north"/>
+    <comp lib="0" loc="(170,560)" name="Tunnel">
+      <a name="facing" val="south"/>
       <a name="label" val="MIPS_Direccion_RAM"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(140,520)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="MIPS_Escribir"/>
+    <comp lib="0" loc="(170,590)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Usar_Little_Endian"/>
     </comp>
-    <comp lib="0" loc="(200,900)" name="Tunnel">
+    <comp lib="0" loc="(200,1000)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="RAM_Word"/>
       <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(210,350)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="MIPS_Indice_Instruccion"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(210,380)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Usar_Little_Endian"/>
     </comp>
     <comp lib="0" loc="(220,210)" name="Clock">
       <a name="label" val="Reloj"/>
@@ -90,7 +119,7 @@
     <comp lib="0" loc="(250,210)" name="Tunnel">
       <a name="label" val="Reloj"/>
     </comp>
-    <comp lib="0" loc="(250,820)" name="Tunnel">
+    <comp lib="0" loc="(250,920)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="Encender_MIPS"/>
     </comp>
@@ -98,29 +127,26 @@
       <a name="facing" val="south"/>
       <a name="label" val="Limpiar_RAM"/>
     </comp>
-    <comp lib="0" loc="(290,520)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="MIPS_Solicitar_RAM"/>
-    </comp>
-    <comp lib="0" loc="(290,600)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="Usar_Little_Endian"/>
-    </comp>
-    <comp lib="0" loc="(300,900)" name="Tunnel">
+    <comp lib="0" loc="(300,1000)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="RAM_Nibble"/>
       <a name="width" val="16"/>
     </comp>
-    <comp lib="0" loc="(350,820)" name="Tunnel">
+    <comp lib="0" loc="(320,710)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="MIPS_Granularidad_Memoria"/>
+      <a name="width" val="2"/>
+    </comp>
+    <comp lib="0" loc="(350,920)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="Poder"/>
     </comp>
-    <comp lib="0" loc="(400,900)" name="Tunnel">
+    <comp lib="0" loc="(400,1000)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="RAM_Byte"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(410,820)" name="Tunnel">
+    <comp lib="0" loc="(410,920)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="Reloj"/>
     </comp>
@@ -128,77 +154,74 @@
       <a name="facing" val="south"/>
       <a name="label" val="Usar_Little_Endian"/>
     </comp>
-    <comp lib="0" loc="(430,520)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Limpiar_RAM"/>
-    </comp>
-    <comp lib="0" loc="(440,390)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="MIPS_Indice_Instruccion"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(440,420)" name="Tunnel">
+    <comp lib="0" loc="(500,710)" name="Tunnel">
       <a name="facing" val="north"/>
-      <a name="label" val="Usar_Little_Endian"/>
-    </comp>
-    <comp lib="0" loc="(450,600)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="MIPS_Entrada_RAM"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(510,520)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="Reloj"/>
+      <a name="label" val="MIPS_Escribir"/>
     </comp>
     <comp lib="0" loc="(530,110)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="Poder"/>
     </comp>
-    <comp lib="0" loc="(770,880)" name="Tunnel">
+    <comp lib="0" loc="(560,380)" name="Bit Extender">
+      <a name="in_width" val="30"/>
+      <a name="out_width" val="24"/>
+      <a name="type" val="zero"/>
+    </comp>
+    <comp lib="0" loc="(590,590)" name="Bit Extender">
+      <a name="in_width" val="32"/>
+      <a name="out_width" val="26"/>
+      <a name="type" val="zero"/>
+    </comp>
+    <comp lib="0" loc="(590,710)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Reloj"/>
+    </comp>
+    <comp lib="0" loc="(670,710)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Limpiar_RAM"/>
+    </comp>
+    <comp lib="0" loc="(810,980)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="MIPS_Entrada_RAM"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(790,390)" name="Tunnel">
-      <a name="facing" val="south"/>
+    <comp lib="0" loc="(830,430)" name="Tunnel">
       <a name="label" val="ROM_Word"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(790,520)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="RAM_Word"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(790,820)" name="Tunnel">
+    <comp lib="0" loc="(830,920)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="MIPS_Indice_Instruccion"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(890,520)" name="Tunnel">
+    <comp lib="0" loc="(980,610)" name="Tunnel">
       <a name="facing" val="south"/>
-      <a name="label" val="RAM_Nibble"/>
-      <a name="width" val="16"/>
+      <a name="label" val="RAM_Word"/>
+      <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(950,880)" name="Tunnel">
+    <comp lib="0" loc="(990,980)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="MIPS_Direccion_RAM"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(980,820)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="MIPS_Solicitar_RAM"/>
+    <comp lib="12" loc="(720,930)" name="MIPS_Processor">
+      <a name="label" val="Main_Processor"/>
     </comp>
-    <comp lib="0" loc="(990,520)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="RAM_Byte"/>
-      <a name="width" val="8"/>
+    <comp lib="13" loc="(500,360)" name="Four_GB_Address_Endian_Translator"/>
+    <comp lib="13" loc="(500,570)" name="Four_GB_Address_Endian_Translator"/>
+    <comp lib="13" loc="(920,630)" name="Sixty_Four_Mebibyte_RAM_Controller">
+      <a name="label" val="RAM_Memory"/>
     </comp>
-    <comp lib="1" loc="(440,550)" name="NOT Gate">
-      <a name="size" val="20"/>
+    <comp lib="4" loc="(580,370)" name="ROM">
+      <a name="addrWidth" val="24"/>
+      <a name="appearance" val="classic"/>
+      <a name="contents">addr/data: 24 32
+20080001 21290002 1284822 8100000
+</a>
+      <a name="dataWidth" val="32"/>
+      <a name="label" val="ROM_Memory"/>
+      <a name="labelvisible" val="true"/>
     </comp>
-    <comp lib="12" loc="(680,830)" name="MIPS_Processor"/>
-    <comp lib="13" loc="(730,400)" name="Four_GB_ROM_Controller"/>
-    <comp lib="13" loc="(730,530)" name="Four_GB_RAM_Controller"/>
     <comp lib="5" loc="(220,110)" name="DipSwitch">
       <a name="facing" val="east"/>
       <a name="label" val="Opciones"/>
@@ -208,7 +231,7 @@
     <comp lib="5" loc="(220,170)" name="Button">
       <a name="label" val="Encender_MIPS"/>
     </comp>
-    <comp lib="8" loc="(165,745)" name="Text">
+    <comp lib="8" loc="(165,845)" name="Text">
       <a name="color" val="#6aa9cf"/>
       <a name="font" val="SansSerif bold 32"/>
       <a name="text" val="Procesadores"/>
@@ -217,69 +240,75 @@
       <a name="font" val="SansSerif bold 32"/>
       <a name="text" val="Configuración"/>
     </comp>
-    <comp lib="8" loc="(230,310)" name="Text">
+    <comp lib="8" loc="(215,290)" name="Text">
       <a name="color" val="#56c22b"/>
       <a name="font" val="SansSerif bold 32"/>
       <a name="text" val="Unidades de Memoria"/>
     </comp>
-    <wire from="(100,860)" to="(100,900)"/>
-    <wire from="(100,860)" to="(450,860)"/>
-    <wire from="(1130,820)" to="(1130,850)"/>
-    <wire from="(120,570)" to="(120,600)"/>
-    <wire from="(120,570)" to="(550,570)"/>
-    <wire from="(140,520)" to="(140,560)"/>
-    <wire from="(140,560)" to="(550,560)"/>
-    <wire from="(200,870)" to="(200,900)"/>
-    <wire from="(200,870)" to="(450,870)"/>
+    <wire from="(100,960)" to="(100,1000)"/>
+    <wire from="(100,960)" to="(450,960)"/>
+    <wire from="(1050,920)" to="(1050,940)"/>
+    <wire from="(1080,610)" to="(1080,640)"/>
+    <wire from="(1180,610)" to="(1180,650)"/>
+    <wire from="(120,640)" to="(120,710)"/>
+    <wire from="(120,640)" to="(720,640)"/>
+    <wire from="(1230,920)" to="(1230,950)"/>
+    <wire from="(170,560)" to="(170,570)"/>
+    <wire from="(170,570)" to="(340,570)"/>
+    <wire from="(170,580)" to="(170,590)"/>
+    <wire from="(170,580)" to="(340,580)"/>
+    <wire from="(200,970)" to="(200,1000)"/>
+    <wire from="(200,970)" to="(450,970)"/>
+    <wire from="(210,350)" to="(210,360)"/>
+    <wire from="(210,360)" to="(340,360)"/>
+    <wire from="(210,370)" to="(210,380)"/>
+    <wire from="(210,370)" to="(340,370)"/>
     <wire from="(220,120)" to="(280,120)"/>
     <wire from="(220,130)" to="(420,130)"/>
     <wire from="(220,140)" to="(530,140)"/>
     <wire from="(220,170)" to="(250,170)"/>
     <wire from="(220,210)" to="(250,210)"/>
-    <wire from="(250,820)" to="(250,850)"/>
-    <wire from="(250,850)" to="(450,850)"/>
+    <wire from="(250,920)" to="(250,950)"/>
+    <wire from="(250,950)" to="(450,950)"/>
     <wire from="(280,110)" to="(280,120)"/>
-    <wire from="(290,520)" to="(290,550)"/>
-    <wire from="(290,550)" to="(420,550)"/>
-    <wire from="(290,580)" to="(290,600)"/>
-    <wire from="(290,580)" to="(550,580)"/>
-    <wire from="(300,880)" to="(300,900)"/>
-    <wire from="(300,880)" to="(450,880)"/>
-    <wire from="(350,820)" to="(350,840)"/>
-    <wire from="(350,840)" to="(450,840)"/>
-    <wire from="(400,890)" to="(400,900)"/>
-    <wire from="(400,890)" to="(450,890)"/>
-    <wire from="(410,820)" to="(410,830)"/>
-    <wire from="(410,830)" to="(450,830)"/>
+    <wire from="(300,980)" to="(300,1000)"/>
+    <wire from="(300,980)" to="(450,980)"/>
+    <wire from="(320,650)" to="(320,710)"/>
+    <wire from="(320,650)" to="(720,650)"/>
+    <wire from="(350,920)" to="(350,940)"/>
+    <wire from="(350,940)" to="(450,940)"/>
+    <wire from="(400,990)" to="(400,1000)"/>
+    <wire from="(400,990)" to="(450,990)"/>
+    <wire from="(410,920)" to="(410,930)"/>
+    <wire from="(410,930)" to="(450,930)"/>
     <wire from="(420,110)" to="(420,130)"/>
-    <wire from="(430,520)" to="(430,540)"/>
-    <wire from="(430,540)" to="(550,540)"/>
-    <wire from="(440,390)" to="(440,400)"/>
-    <wire from="(440,400)" to="(550,400)"/>
-    <wire from="(440,410)" to="(440,420)"/>
-    <wire from="(440,410)" to="(550,410)"/>
-    <wire from="(440,550)" to="(550,550)"/>
-    <wire from="(450,590)" to="(450,600)"/>
-    <wire from="(450,590)" to="(550,590)"/>
-    <wire from="(510,520)" to="(510,530)"/>
-    <wire from="(510,530)" to="(550,530)"/>
+    <wire from="(500,380)" to="(520,380)"/>
+    <wire from="(500,570)" to="(540,570)"/>
+    <wire from="(500,660)" to="(500,710)"/>
+    <wire from="(500,660)" to="(720,660)"/>
     <wire from="(530,110)" to="(530,140)"/>
-    <wire from="(680,830)" to="(790,830)"/>
-    <wire from="(680,840)" to="(980,840)"/>
-    <wire from="(680,850)" to="(1130,850)"/>
-    <wire from="(680,860)" to="(950,860)"/>
-    <wire from="(680,870)" to="(770,870)"/>
-    <wire from="(730,410)" to="(790,410)"/>
-    <wire from="(730,540)" to="(790,540)"/>
-    <wire from="(730,550)" to="(890,550)"/>
-    <wire from="(730,560)" to="(990,560)"/>
-    <wire from="(770,870)" to="(770,880)"/>
-    <wire from="(790,390)" to="(790,410)"/>
-    <wire from="(790,520)" to="(790,540)"/>
-    <wire from="(790,820)" to="(790,830)"/>
-    <wire from="(890,520)" to="(890,550)"/>
-    <wire from="(950,860)" to="(950,880)"/>
-    <wire from="(980,820)" to="(980,840)"/>
-    <wire from="(990,520)" to="(990,560)"/>
+    <wire from="(540,570)" to="(540,590)"/>
+    <wire from="(540,590)" to="(550,590)"/>
+    <wire from="(560,380)" to="(580,380)"/>
+    <wire from="(590,590)" to="(660,590)"/>
+    <wire from="(590,670)" to="(590,710)"/>
+    <wire from="(590,670)" to="(720,670)"/>
+    <wire from="(660,590)" to="(660,630)"/>
+    <wire from="(660,630)" to="(720,630)"/>
+    <wire from="(670,680)" to="(670,710)"/>
+    <wire from="(670,680)" to="(720,680)"/>
+    <wire from="(720,930)" to="(830,930)"/>
+    <wire from="(720,940)" to="(1050,940)"/>
+    <wire from="(720,950)" to="(1230,950)"/>
+    <wire from="(720,960)" to="(990,960)"/>
+    <wire from="(720,970)" to="(810,970)"/>
+    <wire from="(810,970)" to="(810,980)"/>
+    <wire from="(820,430)" to="(830,430)"/>
+    <wire from="(830,920)" to="(830,930)"/>
+    <wire from="(920,630)" to="(980,630)"/>
+    <wire from="(920,640)" to="(1080,640)"/>
+    <wire from="(920,650)" to="(1180,650)"/>
+    <wire from="(980,610)" to="(980,630)"/>
+    <wire from="(990,960)" to="(990,980)"/>
   </circuit>
 </project>
