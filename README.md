@@ -1,92 +1,95 @@
-# Descripción entidad de caché
+# 📟 Multiprocesador Gráfico
 
-Esta entidad VHDL implementa una caché asociativa de 2 vías para un procesador que utiliza el pipeline de MIPS. Opera con direcciones de 32 bits y datos de salida de 32 bits. 
-Divide la dirección en un tag de 17 bits, un índice de 8 bits y un desplazamiento (offset) de 5 bits. 
-La caché utiliza la política de reemplazo del menos utilizado recientemente (LRU). 
+Simulación de arquitectura multi-procesador para procesamiento gráfico de imágenes desarrollado para el curso de Arquitectura de la carrera de Computación de Varios Énfasis de la Universidad de Costa Rica, impartido durante el primer semestre de 2024.
 
-## Entidad `cacheLRU`: 
+## 🔎 Acerca del proyecto
 
-### Puertos: 
+Éste proyecto consiste en una simulación de un multi-procesador y componentes digitales de memoria y visualización correspondientes para el procesamiento gráfico de imágenes. A grandes razgos, la arquitectura consiste de:
+- [Procesador MIPS-I32](./MIPS/README.md) (como procesador principal de propósito general)
+- Co-procesadores RISC-V (especializados en procesamiento de imágenes)
+- [Memoria Caché](./Cache/README.md) (de múltiples niveles)
 
-- **Entradas**:
-	- `clock` (std_logic): Señal de reloj 
-	- `Address` (std_logic_vector(31 DOWNTO 0)): Dirección de 32 bits desde el cual se va a leer el dato. 
+### 📋 Pre-requisitos
 
-- **Salidas:**
-  - `hit` (std_logic): Indica si el dato solicitado se encuentra en la caché.
-  - `data_out` (std_logic_vector(31 DOWNTO 0)): Dato de 32 bits leído de la caché.
-  - `tag_out` (std_logic_vector(16 DOWNTO 0)): Parte del tag de la dirección de salida.
-  - `index_out` (std_logic_vector(8 DOWNTO 0)): Parte del índice de la dirección de salida.
-  - `offset_out` (std_logic_vector(5 DOWNTO 0)): Parte del desplazamiento de la dirección de salida.
-  - `miss_out` (std_logic): Indica si el dato solicitado no se encuentra en la caché.
+Para ejecutar esta simulación usted requiere del siguiente software: 
+- [Logisim Evolution](https://github.com/logisim-evolution/logisim-evolution) (v.3.8.0)
+- [ModelSim FPGA Version](https://www.intel.com/content/www/us/en/software-kit/750666/modelsim-intel-fpgas-standard-edition-software-version-20-1-1.html) (v.20.1.1)
 
+Adicionalmente, se require de cierta familiaridad previa con la versión correspondiente del software de simulación de `Logisim Evolution`.
 
-## Arquitectura:
+### 🎬 Ejecución del proyecto
 
-### Tipos y Señales Internas
+Para ejecutar la simulación del proyecto, siga los siguientes pasos:
+1. Clone el repositorio localmente en su máquina
+2. Ejecute el ambiente de simulación de `Logisim Evolution` y abra el archivo de circuito digital encontrado bajo [`/MIPS/Multiprocesador.circ`](./MIPS/Multiprocesador.circ). 
 
-- **Tipos:**
-  - `bloque`: Tipo de array que representa un bloque de caché (array de std_logic_vector(16 DOWNTO 0)).
-  - `t_set`: Tipo de array que representa un conjunto de bloques de caché (array de `bloque`).
-  - `t_tag`: Tipo de array que representa un conjunto de tags.
-  - `t_valid`: Tipo de array que representa bits de validez para los bloques de caché.
-  - `t_Dirty`: Tipo de array que representa bits de suciedad para los bloques de caché.
-  - `t_LRU`: Tipo de array que representa bits LRU para los bloques de caché.
-  - `t_Memory`: Tipo de array que representa la memoria principal.
+> Debería obtener una vista semejante a la siguiente:
+![./img/docs/01_Opening_Project.png](./img/docs/01_Opening_Project.png)
 
-- **Señales:**
-  - `cache0`, `cache1`: Dos conjuntos de caché.
-  - `dirtys0`, `dirtys1`: Bits de suciedad para ambos conjuntos de caché.
-  - `valids0`, `valids1`: Bits de validez para ambos conjuntos de caché.
-  - `tags0`, `tags1`: Tags para ambos conjuntos de caché.
-  - `lru0`, `lru1`: Bits LRU para ambos conjuntos de caché.
-  - `s_tag`, `s_index`, `s_offset`: Señales para almacenar partes de la dirección de entrada.
-  - `data`: Señal para almacenar los datos leídos de la caché o de la memoria principal.
-  - `hit_addr`: Señal que indica si la dirección es un hit en la caché.
-  - `miss`: Señal que indica si la dirección es un miss en la caché.
-  - `mainmem`: Señal que representa la memoria principal.
+3. Asegúrese de que éste circuito digital y sus dependencias (bibliotecas de `Logisim Evolution`) se encuentren correctamente cargadas. Para más información, puede leer [la documentación correspondiente de `Logisim Evolution`](https://github.com/logisim-evolution/logisim-evolution/blob/main/docs/docs.md)
+4. Una vez en la simulación, asegúrese de que la simulación de VHDL estén habilitada. De no estarlo, habilítela (`VHDL simulation enabled`) y aplique la opción de Reiniciar simulación (`Reset simulation`).
 
-### Proceso
+> Debería poder observar las opciones de habilitarlas bajo el menú rápido de `Logisim Evolution` de la siguiente manera:
+![./img/docs/03_Opening_ROM.png](./img/docs/03_Opening_ROM.png)
 
-El proceso se activa con el flanco positivo de la señal `clock`.
-Realiza los siguientes pasos:
+5. Una vez habilitada la simulación de VHDL, navegue al interior del subcircuito de ROM (`Four_GB_ROM_Controller`).
 
-1. **Extraen los componentes de la dirección:**
-   - `s_tag` <= Address(31 DOWNTO 15)
-   - `s_index` <= Address(14 DOWNTO 6)
-   - `s_offset` <= Address(5 DOWNTO 0)
-  
-2. **Comprobar Validez y Tags:**
-   - Se verifica si el bit de validez está configurado para cualquiera de los conjuntos de caché.
-   - Luego se verificar si el tag coincide con los tags almacenados en cualquiera de los conjuntos de caché.
-   - Si es válido y el tag coincide, se leen los datos del conjunto de caché correspondiente y se cambian los valores de `hit_addr` a '1' y `miss` a '0'. Ya que se encontró el dato en la caché. 
+> Debería poder accesar al subcircuito presionando click izquierdo sobre el subcircuito rotulado de la siguiente forma:
+![./img/docs/02_Enabling_VHDL_Simulation.png](./img/docs/02_Enabling_VHDL_Simulation.png)
 
-3. **Reemplazo LRU:**
-   - Si el bit en LRU indica el conjunto 0, se actualiza el conjunto 0.
-     - Se configura el bit de validez para el conjunto 0.
-     - Se actualiza el bit de LRU para indicar el uso reciente del conjunto 0.
-     - Se almacena el tag y los datos en el conjunto 0.
-   - De lo contrario, se actualiza el conjunto 1.
-     - Se configurar el bit de validez para el conjunto 1.
-     - Se actualiza el bit de LRU para indicar el uso reciente del conjunto 1.
-     - Se almacena el tag y los datos en el conjunto 1.
+6. Una vez adentro, puede editar los contenidos de los módulos de memoria para escribir su programa. Se encuentran dispuestos de izquierda a derecha, de arriba hacia abajo, en direccionamiento de 32 bits Big Endian para palabras de 32 bits escritas en Little Endian (de derecha a izquierda también). 
 
-4. **Señales de Salida:**
-   - Se asigna `hit_addr` a `hit`.
-   - Se asigna `data` a `data_out`.
-   - Se asignar `miss` a `miss_out`.
+> Aplique la opción de editar los contenido del primer módulo de memoria (de izquierda a derecha, de arriba hacia abajo) para escribir las primeras instrucciones del programa a leer por el procesador de propósito general, y así para el resto de su programa. 
 
+> Debería poder observar la opción de editar contenidos de la memoria al presionar click derecho sobre el componente de `Logisim Evolution` descrito anteriormente:
+![./img/docs/04_Editing_Memory.png](./img/docs/04_Editing_Memory.png)
 
+> Alternativamente, puede cargar un archivo de su computadora representando las instrucciones a cada módulo de memoria correspondiente mediante los otros mecanismos que ofrece `Logisim Evolution`.
 
-## Notas Adicionales
+7. Una vez que haya terminado de escribir su programa, navegue de vuelta al circuito principal y habilite la opción de activación automática de reloj (`Auto-tick Enabled`)
 
-- En este primer diseño, la caché se implementó para interactuar con una memoria principal simplificada (`mainmem`), que está precargada con datos de ejemplo. 
-- La política de reemplazo LRU asegura que el bloque de caché menos usado recientemente sea reemplazado cuando se carga un nuevo bloque en la caché.
-- Esta implementación asume operaciones de solo lectura y no maneja operaciones de escritura ni actualizaciones de bits de suciedad.
-- Esta implementación es un primer acercamiento al diseño de una cache, por eso las salidas incluyen el desplazamiento (offset), index y el tag. Esto para ver que estaba funcionando de manera correcta. 
+> Debería poder observar la opción de habilitarlo de la siguiente manera:
+![./img/docs/05_Enable_Clock.png](./img/docs/05_Enable_Clock.png)
 
-## Mejoras a implementar:
+> Puede cambiar la frecuencia del reloj y otros aspectos mediante mecanismos que ofrece `Logisim Evolution`.
 
-- Implementar políticas de write-back y write-through.
-- Integrar con un modelo de memoria principal
-- Cambiar la interfaz de VHDL para poder integrar con el procesador de pipeline MIPS
+8. Ahora, habilite en el interruptor correspondiente, presente en el circuito principal, la opción de `Poder` para "brindar poder" al procesador. 
+
+> Debería poder activar el interruptor de `Poder` de la siguiente forma:
+![./img/docs/06_Enable_Power.png](./img/docs/06_Enable_Power.png)
+
+9. Tras haberlo hecho, presione con el click izquierdo el botón de `Encender_MIPS` correspondiente para "prender" el procesador principal MIPS. Manténgalo presionado durante un ciclo únicamente.
+
+> Debería poder presionar el botón de `Encender_MIPS` de la siguiente forma:
+![./img/docs/07_Turn_On_MIPS.png](./img/docs/07_Turn_On_MIPS.png)
+
+10. De haber seguido las instrucciones, el procesador principal de MIPS-I32 se debería encontrar corriendo en la simulación. Si desea detener la simulación, detenga el reloj de la simulación deshabilitando la opción de activación automática de reloj (`Auto-tick Enabled`) o el interruptor de `Poder`, o ambas cosas.
+
+11. Si desea observar los efectos de la ejecución de instrucciones del procesador sobre los registros de éste a traves del tiempo, los puede visualizar un diagrama de tiempo provisto por `Logisim Evolution` bajo la opción correspondiente (`Timing diagram...`).
+
+> Debería poder accesar al menú de diagrama de tiempo de la siguiente forma:
+![./img/docs/08_Timing_Diagram_Menu.png](./img/docs/08_Timing_Diagram_Menu.png)
+
+> Una vez adentro, puede añadir las señales que desea observar en el diagrama de tiempo como se muestra a continuación. Puede encontrar más información refiriéndose a la [la documentación correspondiente de `Logisim Evolution`](https://github.com/logisim-evolution/logisim-evolution/blob/main/docs/docs.md):
+![./img/docs/09_Timing_Diagram_Add_Signals.png](./img/docs/09_Timing_Diagram_Add_Signals.png)
+
+> Por último, puede observar los efectos en las señales añadidas a través del tiempo mediante el diagrama como se muestra en el ejemplo a continuación, donde se observan los valores de la página de registros del procesador MIPS tras un par de ciclos de reloj:
+![./img/docs/10_Timing_Diagram_Signals_Example.png](./img/docs/10_Timing_Diagram_Signals_Example.png)
+
+## 🚧 Ejecución de las pruebas
+
+TODO @GabrielMBulgarelli
+
+## 👩🏻‍💻 Estado del proyecto
+
+El proyecto actualmente se encuentra en desarrollo, con la versión actual presentando el procesador de propósito general y la caché de memoria, pero sin la unión entre ambos. Se planea desarrollar esto a futuro.
+
+Para más información acerca de los distintos módulos de la aplicación, referirse a la documentación correspondiente, presente en las carpetas de [MIPS](./MIPS/) y [Caché](./Cache/)
+
+## 🤝🏻 Créditos
+
+- **Javier Solano** - *Desarollo del procesador MIPS de propósito general* - [suehtemorp](https://github.com/suehtemorp)
+
+- **Lucía Elizondo** - *Desarollo de la memoria caché* - [lesan2807](https://github.com/lesan2807)
+
+- **Gabriel Bulgarelli** - *Apoyo en caché y pruebas de ejecución* - [GabrielMBulgarelli](https://github.com/GabrielMBulgarelli)
