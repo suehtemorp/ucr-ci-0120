@@ -78,11 +78,6 @@
       <a name="label" val="RAM_Byte"/>
       <a name="width" val="8"/>
     </comp>
-    <comp lib="0" loc="(1190,190)" name="Bit Extender">
-      <a name="in_width" val="30"/>
-      <a name="out_width" val="24"/>
-      <a name="type" val="zero"/>
-    </comp>
     <comp lib="0" loc="(120,710)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="MIPS_Entrada_RAM"/>
@@ -91,10 +86,6 @@
     <comp lib="0" loc="(1230,920)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="MIPS_Escribir"/>
-    </comp>
-    <comp lib="0" loc="(1460,240)" name="Tunnel">
-      <a name="label" val="ROM_Word"/>
-      <a name="width" val="32"/>
     </comp>
     <comp lib="0" loc="(170,560)" name="Tunnel">
       <a name="facing" val="south"/>
@@ -198,15 +189,6 @@
       <a name="label" val="MIPS_Indice_Instruccion"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(840,160)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="MIPS_Indice_Instruccion"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(840,190)" name="Tunnel">
-      <a name="facing" val="north"/>
-      <a name="label" val="Usar_Little_Endian"/>
-    </comp>
     <comp lib="0" loc="(980,610)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="RAM_Word"/>
@@ -224,20 +206,10 @@
     <comp lib="12" loc="(720,930)" name="MIPS_Processor">
       <a name="label" val="Main_Processor"/>
     </comp>
-    <comp lib="13" loc="(1140,170)" name="Four_GB_Address_Endian_Translator"/>
     <comp lib="13" loc="(500,570)" name="Four_GB_Address_Endian_Translator"/>
     <comp lib="13" loc="(560,360)" name="Four_GB_Address_Endian_Translator"/>
     <comp lib="13" loc="(920,630)" name="Sixty_Four_Mebibyte_RAM_Controller">
       <a name="label" val="RAM_Memory"/>
-    </comp>
-    <comp lib="4" loc="(1210,180)" name="ROM">
-      <a name="addrWidth" val="24"/>
-      <a name="appearance" val="classic"/>
-      <a name="contents">addr/data: 24 32
-20080001 21290002 1284822 8100000
-</a>
-      <a name="dataWidth" val="32"/>
-      <a name="labelvisible" val="true"/>
     </comp>
     <comp lib="5" loc="(220,110)" name="DipSwitch">
       <a name="facing" val="east"/>
@@ -269,13 +241,10 @@
     <wire from="(100,960)" to="(450,960)"/>
     <wire from="(1050,920)" to="(1050,940)"/>
     <wire from="(1080,610)" to="(1080,640)"/>
-    <wire from="(1140,190)" to="(1150,190)"/>
     <wire from="(1180,610)" to="(1180,650)"/>
-    <wire from="(1190,190)" to="(1210,190)"/>
     <wire from="(120,640)" to="(120,710)"/>
     <wire from="(120,640)" to="(720,640)"/>
     <wire from="(1230,920)" to="(1230,950)"/>
-    <wire from="(1450,240)" to="(1460,240)"/>
     <wire from="(170,560)" to="(170,570)"/>
     <wire from="(170,570)" to="(340,570)"/>
     <wire from="(170,580)" to="(170,590)"/>
@@ -331,10 +300,6 @@
     <wire from="(720,970)" to="(810,970)"/>
     <wire from="(810,970)" to="(810,980)"/>
     <wire from="(830,920)" to="(830,930)"/>
-    <wire from="(840,160)" to="(840,170)"/>
-    <wire from="(840,170)" to="(980,170)"/>
-    <wire from="(840,180)" to="(840,190)"/>
-    <wire from="(840,180)" to="(980,180)"/>
     <wire from="(890,350)" to="(990,350)"/>
     <wire from="(920,630)" to="(980,630)"/>
     <wire from="(920,640)" to="(1080,640)"/>
