@@ -18,8 +18,8 @@
   <lib desc="#BFH-Praktika" name="9"/>
   <lib desc="#Input/Output-Extra" name="10"/>
   <lib desc="#Soc" name="11"/>
-  <lib desc="file#Modulos_MIPS.circ" name="12"/>
-  <lib desc="file#Modulos_Memoria.circ" name="13"/>
+  <lib desc="file#Modulos_Memoria.circ" name="12"/>
+  <lib desc="file#Modulos_MIPS.circ" name="13"/>
   <main name="Main"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
@@ -203,13 +203,13 @@
       <a name="label" val="MIPS_Direccion_RAM"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="12" loc="(720,930)" name="MIPS_Processor">
-      <a name="label" val="Main_Processor"/>
-    </comp>
-    <comp lib="13" loc="(500,570)" name="Four_GB_Address_Endian_Translator"/>
-    <comp lib="13" loc="(560,360)" name="Four_GB_Address_Endian_Translator"/>
-    <comp lib="13" loc="(920,630)" name="Sixty_Four_Mebibyte_RAM_Controller">
+    <comp lib="12" loc="(500,570)" name="Four_GB_Address_Endian_Translator"/>
+    <comp lib="12" loc="(560,360)" name="Four_GB_Address_Endian_Translator"/>
+    <comp lib="12" loc="(920,630)" name="Sixty_Four_Mebibyte_RAM_Controller">
       <a name="label" val="RAM_Memory"/>
+    </comp>
+    <comp lib="13" loc="(720,930)" name="MIPS_Processor">
+      <a name="label" val="Main_Processor"/>
     </comp>
     <comp lib="5" loc="(220,110)" name="DipSwitch">
       <a name="facing" val="east"/>

@@ -56,93 +56,72 @@
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(1110,690)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="set0"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(1110,710)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="set1"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(1120,670)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="miss"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(1130,570)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Hit"/>
-      <a name="output" val="true"/>
-    </comp>
-    <comp lib="0" loc="(1220,830)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Offset"/>
-      <a name="output" val="true"/>
-      <a name="radix" val="16"/>
-      <a name="width" val="6"/>
-    </comp>
-    <comp lib="0" loc="(1230,580)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Data_output"/>
-      <a name="output" val="true"/>
-      <a name="radix" val="16"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(1250,770)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Index"/>
-      <a name="output" val="true"/>
-      <a name="radix" val="16"/>
-      <a name="width" val="5"/>
-    </comp>
-    <comp lib="0" loc="(1300,680)" name="Pin">
-      <a name="appearance" val="classic"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="Tag"/>
-      <a name="output" val="true"/>
-      <a name="radix" val="16"/>
-      <a name="width" val="21"/>
-    </comp>
-    <comp lib="0" loc="(800,640)" name="Pin">
+    <comp lib="0" loc="(1530,660)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="Address"/>
+      <a name="label" val="address_mips"/>
       <a name="radix" val="16"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(850,570)" name="Clock">
-      <a name="label" val="Clk"/>
+    <comp lib="0" loc="(1540,640)" name="Clock">
+      <a name="label" val="relojs_mips1"/>
     </comp>
-    <comp loc="(1100,570)" name="cacheLRU">
+    <comp lib="0" loc="(1570,720)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="entradadato"/>
+      <a name="radix" val="16"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(1600,700)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="label" val="write_mips"/>
+    </comp>
+    <comp lib="0" loc="(1890,660)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="data_mips"/>
+      <a name="output" val="true"/>
+      <a name="radix" val="16"/>
+      <a name="width" val="32"/>
+    </comp>
+    <comp lib="0" loc="(1910,610)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="hit_mips"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(2020,590)" name="Clock"/>
+    <comp lib="0" loc="(2030,670)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+    </comp>
+    <comp loc="(1850,640)" name="cacheMips">
       <a name="appearance" val="logisim_evolution"/>
     </comp>
-    <wire from="(1100,570)" to="(1130,570)"/>
-    <wire from="(1100,580)" to="(1100,590)"/>
-    <wire from="(1100,580)" to="(1230,580)"/>
-    <wire from="(1100,610)" to="(1220,610)"/>
-    <wire from="(1100,630)" to="(1210,630)"/>
-    <wire from="(1100,650)" to="(1190,650)"/>
-    <wire from="(1100,670)" to="(1120,670)"/>
-    <wire from="(1100,690)" to="(1110,690)"/>
-    <wire from="(1100,710)" to="(1110,710)"/>
-    <wire from="(1190,650)" to="(1190,830)"/>
-    <wire from="(1190,830)" to="(1220,830)"/>
-    <wire from="(1210,630)" to="(1210,770)"/>
-    <wire from="(1210,770)" to="(1250,770)"/>
-    <wire from="(1220,610)" to="(1220,680)"/>
-    <wire from="(1220,680)" to="(1300,680)"/>
-    <wire from="(800,640)" to="(870,640)"/>
-    <wire from="(850,570)" to="(880,570)"/>
-    <wire from="(870,590)" to="(870,640)"/>
-    <wire from="(870,590)" to="(880,590)"/>
+    <comp loc="(2250,650)" name="RAM_Module">
+      <a name="appearance" val="logisim_evolution"/>
+    </comp>
+    <wire from="(1400,680)" to="(1400,800)"/>
+    <wire from="(1400,680)" to="(1630,680)"/>
+    <wire from="(1400,800)" to="(2320,800)"/>
+    <wire from="(1530,660)" to="(1630,660)"/>
+    <wire from="(1540,640)" to="(1630,640)"/>
+    <wire from="(1570,720)" to="(1630,720)"/>
+    <wire from="(1600,700)" to="(1630,700)"/>
+    <wire from="(1850,640)" to="(1870,640)"/>
+    <wire from="(1850,660)" to="(1890,660)"/>
+    <wire from="(1850,680)" to="(1940,680)"/>
+    <wire from="(1850,700)" to="(1850,720)"/>
+    <wire from="(1850,720)" to="(2010,720)"/>
+    <wire from="(1870,610)" to="(1870,640)"/>
+    <wire from="(1870,610)" to="(1910,610)"/>
+    <wire from="(1940,680)" to="(1940,690)"/>
+    <wire from="(1940,690)" to="(2030,690)"/>
+    <wire from="(2010,710)" to="(2010,720)"/>
+    <wire from="(2010,710)" to="(2030,710)"/>
+    <wire from="(2020,590)" to="(2020,650)"/>
+    <wire from="(2020,650)" to="(2030,650)"/>
+    <wire from="(2240,650)" to="(2250,650)"/>
+    <wire from="(2250,650)" to="(2320,650)"/>
+    <wire from="(2320,650)" to="(2320,800)"/>
   </circuit>
   <vhdl name="cache">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -510,5 +489,271 @@ end process;
 	set_1 &lt;= set_1_out;
 
 END TypeArchitecture;
+</vhdl>
+  <vhdl name="cacheMips">--------------------------------------------------------------------------------
+-- Description :
+-- Cache for pipelined MIPS processor. 
+-- 2 way associative.
+-- 32 bit addresses and 32 bit data output. 
+-- Address is divided this way: 
+--  tag is of 17 bits, index is of 8 bits and offset is 5 bits. 
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;  
+
+ENTITY cacheMips IS
+  PORT (
+  ------------------------------------------------------------------------------
+  -- Input ports
+    clock      : IN  std_logic;           
+    Address: IN std_logic_vector(31 DOWNTO 0);
+    Data_From_Mem: IN std_logic_vector(31 DOWNTO 0); 
+    write_cache: IN std_logic; 
+    entrada_dato: IN std_logic_vector(31 DOWNTO 0); 
+
+  ------------------------------------------------------------------------------
+  -- Output ports
+	hit : OUT std_logic; 
+	data: OUT std_logic_vector(31 DOWNTO 0);
+	miss: OUT std_logic; 
+	offset: OUT std_logic_vector(5 DOWNTO 0)
+    );
+END cacheMips;
+
+--------------------------------------------------------------------------------
+-- Architecture of the cacheLRU entity
+--------------------------------------------------------------------------------
+
+ARCHITECTURE TypeArchitecture OF cacheMips IS
+
+-- Cache block definition: array of 64 blocks of 20-bit words
+type bloque is array(0 to 63) of std_logic_vector(20 downto 0);
+
+-- Cache set definition: array of 256 cache blocks
+type t_set is array(0 to 255) of bloque;
+
+-- Two sets for the 2-way associative cache
+signal cache0 : t_set;
+signal cache1 : t_set; 
+
+-- Tag, valid, dirty, and LRU signal definitions
+type t_tag is array(0 to 255) of std_logic_vector(20 downto 0);
+type t_valid is array(0 to 255) of std_logic;
+type t_Dirty is array(0 to 255) of std_logic;
+type t_LRU is array(0 to 255) of std_logic; 
+
+-- Internal signals for tag, index, offset, and data
+signal s_tag : std_logic_vector(20 downto 0);
+signal s_index :std_logic_vector (4 DOWNTO 0); 
+signal s_offset : std_logic_vector (5 DOWNTO 0); 
+signal data_out: std_logic_vector(31 DOWNTO 0); 
+signal hit_addr : std_logic;
+
+-- Main memory definition: array of 32 words of 32 bits
+type t_Memory is array (0 to 31) of std_logic_vector(31 downto 0);
+signal mainmem : t_Memory:= ("00000000000000000000000000000001",others =&gt;"00000000000000000000000000100000");
+
+-- Signals for dirty, valid, tag, and LRU bits for both cache sets
+signal dirtys0 : t_Dirty:= ( others =&gt; '0');
+signal valids0 : t_valid:= ( others =&gt; '0');
+signal tags0 : t_tag:=( others =&gt; "000000000000000000000");
+signal lru0: t_LRU:=(others =&gt; '0'); 
+
+signal dirtys1 : t_Dirty:= ( others =&gt; '0');
+signal valids1 : t_valid:= (others =&gt; '0');
+signal tags1 : t_tag:=( others =&gt; "000000000000000000000");
+signal lru1: t_LRU:=(others =&gt; '1'); 
+
+-- Signal for miss logic
+signal miss_out : std_logic; 
+
+signal set_0_out: std_logic;
+signal set_1_out : std_logic; 
+
+
+
+BEGIN
+-- Process that handles the cache behavior on clock edge
+process (clock)
+	begin
+	if clock = '1' then
+	-- Extracting tag, index, and offset from the address when clock is in its positive state 
+		s_tag &lt;= Address(31 DOWNTO 11); 
+		s_index &lt;= Address(10  DOWNTO 6); 
+		s_offset &lt;= Address(5  DOWNTO 0); 
+		-- Default values for hit and miss signals 
+		hit_addr &lt;= '0'; 
+		miss_out &lt;= '1'; 
+
+		-- Check if the address is in the cache (this is when valid bit and tag match) 
+		if valids0(to_integer(unsigned(s_index))) = '1' or valids1(to_integer(unsigned(s_index))) = '1' then 
+			if s_tag = tags0(to_integer(unsigned(s_index))) or s_tag = tags1(to_integer(unsigned(s_index))) then 
+				-- If found, read data from main memory
+				data_out &lt;= Data_From_Mem;
+				hit_addr &lt;= '1'; 
+				miss_out &lt;= '0';
+			end if; 
+		end if; 
+		-- Determine which set to used based on LRU bit. Check if the tag is not stored already in the cache 
+		if lru0(to_integer(unsigned(s_index))) = '0'and tags1(to_integer(unsigned(s_index))) /= s_tag  then 
+
+				-- Use set 0 
+				valids0(to_integer(unsigned(s_index))) &lt;= '1';
+				
+				-- Actual lru_0 bit changes to '1' and the other lru_1 bit changes to '0' in the index from address.  
+				lru0(to_integer(unsigned(s_index))) &lt;= '1'; 
+				lru1(to_integer(unsigned(s_index))) &lt;= '0';
+				
+				-- Save tag in cache0
+				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= s_tag;
+
+				-- Add the tag to tags0 
+				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+		elsif lru1(to_integer(unsigned(s_index))) = '0' and tags0(to_integer(unsigned(s_index))) /= s_tag then 
+				-- Use set 1 
+				valids1(to_integer(unsigned(s_index))) &lt;= '1';
+				
+				-- Actual lru_1 bit changes to '1' and the other lru_0 bit changes to '0' in the index from address.  
+				lru1(to_integer(unsigned(s_index))) &lt;= '1'; 
+				lru0(to_integer(unsigned(s_index))) &lt;= '0'; 
+				-- Save tag in cache1
+				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= s_tag;
+
+				-- Add the tag to tags1
+				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+		end if;
+	end if; 
+end process;
+
+	-- Assign internal signals to output ports 
+
+	hit &lt;= hit_addr; 
+	data &lt;= data_out;
+	miss &lt;= miss_out; 
+	offset &lt;= s_offset;
+
+END TypeArchitecture;
+</vhdl>
+  <vhdl name="ROM_MIPS">--------------------------------------------------------------------------------&#13;
+-- Project :&#13;
+-- File    :&#13;
+-- Autor   :&#13;
+-- Date    :&#13;
+--&#13;
+--------------------------------------------------------------------------------&#13;
+-- Description :&#13;
+--&#13;
+--------------------------------------------------------------------------------&#13;
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;  
+&#13;
+ENTITY ROM_MIPS IS&#13;
+  PORT (&#13;
+  ------------------------------------------------------------------------------&#13;
+
+    clock      : IN  std_logic;                    
+    MIPS_Indice_Instruccion        : IN  std_logic_vector(31 DOWNTO 0); 
+    Usar_Little_Endian: IN std_logic; 
+    
+  ------------------------------------------------------------------------------&#13;
+
+    byte        : OUT std_logic_vector(31 DOWNTO 0);               
+    nibble        : OUT std_logic_vector(30 DOWNTO 0);
+    word: OUT  std_logic_vector(29 DOWNTO 0);
+    ROM_WORD: OUT std_logic_vector(31 DOWNTO 0) 
+    );&#13;
+END ROM_MIPS;&#13;
+--------------------------------------------------------------------&#13;
+&#13;
+ARCHITECTURE TypeArchitecture OF ROM_MIPS IS&#13;
+
+type t_Memory is array (0 to 64) of std_logic_vector(31 downto 0);
+
+signal byte_out        :  std_logic_vector(31 DOWNTO 0);               
+signal nibble_out        :  std_logic_vector(30 DOWNTO 0);
+signal word_out:   std_logic_vector(29 DOWNTO 0);
+
+signal ROM: t_Memory:=(x"a2d3a1e0",x"1ad3f349",others =&gt;x"00000000") ; 
+signal rom_word_out : std_logic_vector(31 DOWNTO 0);
+
+
+BEGIN
+-- Process that handles the cache behavior on clock edge
+process (clock)
+	begin
+	if clock = '1' then
+		byte_out &lt;= MIPS_Indice_Instruccion; 
+		nibble_out &lt;= MIPS_Indice_Instruccion(31 DOWNTO 1); 
+		word_out &lt;= MIPS_Indice_Instruccion(31 DOWNTO 2);  
+
+		rom_word_out &lt;= ROM(to_integer(unsigned(word_out))); 
+&#13;	end if; 
+end process;
+
+byte &lt;= byte_out; 
+nibble &lt;= nibble_out; 
+word &lt;= word_out; 
+ROM_WORD &lt;= rom_word_out;
+
+END TypeArchitecture;&#13;
+</vhdl>
+  <vhdl name="RAM_Module">--------------------------------------------------------------------------------&#13;
+-- Project :&#13;
+-- File    :&#13;
+-- Autor   :&#13;
+-- Date    :&#13;
+--&#13;
+--------------------------------------------------------------------------------&#13;
+-- Description :&#13;
+--&#13;
+--------------------------------------------------------------------------------&#13;
+&#13;
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;
+&#13;
+ENTITY RAM_Module IS&#13;
+  PORT (&#13;
+  ------------------------------------------------------------------------------&#13;
+  --Insert input ports below&#13;
+	clock: IN std_logic;
+    write : IN std_logic; 
+    read: IN std_logic; 
+    offset: IN std_logic_vector(5 DOWNTO 0); 
+  ------------------------------------------------------------------------------&#13;
+  --Insert output ports below&#13;
+    data        : OUT std_logic_vector(31 DOWNTO 0)                    -- output bit example&#13;
+    );&#13;
+END RAM_Module;&#13;
+&#13;
+--------------------------------------------------------------------------------&#13;
+--Complete your VHDL description below&#13;
+--------------------------------------------------------------------------------&#13;
+&#13;
+ARCHITECTURE TypeArchitecture OF RAM_Module IS&#13;
+&#13;
+-- Main memory definition: array of 32 words of 32 bits
+type t_Memory is array (0 to 63) of std_logic_vector(31 downto 0);
+signal mainmem : t_Memory:= (x"12345678",x"1241a393",others=&gt;x"aaaabbbb");
+
+
+BEGIN&#13;
+process (clock)
+begin
+	if clock = '1' then
+		&#13;if read = '1' then
+			data &lt;= mainmem(to_integer(unsigned(offset))); 
+		end if;
+	end if;  
+&#13;end process; 
+END TypeArchitecture;&#13;
 </vhdl>
 </project>
