@@ -56,72 +56,104 @@
     <a name="circuit" val="main"/>
     <a name="circuitnamedboxfixedsize" val="true"/>
     <a name="simulationFrequency" val="1.0"/>
-    <comp lib="0" loc="(1530,660)" name="Pin">
+    <comp lib="0" loc="(110,350)" name="Clock"/>
+    <comp lib="0" loc="(150,380)" name="Pin">
       <a name="appearance" val="NewPins"/>
-      <a name="label" val="address_mips"/>
+      <a name="label" val="address"/>
       <a name="radix" val="16"/>
-      <a name="width" val="32"/>
+      <a name="width" val="24"/>
     </comp>
-    <comp lib="0" loc="(1540,640)" name="Clock">
-      <a name="label" val="relojs_mips1"/>
-    </comp>
-    <comp lib="0" loc="(1570,720)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="entradadato"/>
-      <a name="radix" val="16"/>
-      <a name="width" val="32"/>
-    </comp>
-    <comp lib="0" loc="(1600,700)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="label" val="write_mips"/>
-    </comp>
-    <comp lib="0" loc="(1890,660)" name="Pin">
+    <comp lib="0" loc="(370,360)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
-      <a name="label" val="data_mips"/>
+      <a name="label" val="hit"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(370,380)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="miss"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(400,400)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="label" val="dataa"/>
       <a name="output" val="true"/>
       <a name="radix" val="16"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(1910,610)" name="Pin">
-      <a name="appearance" val="NewPins"/>
-      <a name="facing" val="west"/>
-      <a name="label" val="hit_mips"/>
-      <a name="output" val="true"/>
+    <comp lib="0" loc="(460,460)" name="Bit Extender">
+      <a name="in_width" val="6"/>
+      <a name="out_width" val="24"/>
+      <a name="type" val="zero"/>
     </comp>
-    <comp lib="0" loc="(2020,590)" name="Clock"/>
-    <comp lib="0" loc="(2030,670)" name="Pin">
-      <a name="appearance" val="NewPins"/>
+    <comp lib="4" loc="(520,410)" name="ROM">
+      <a name="addrWidth" val="24"/>
+      <a name="appearance" val="classic"/>
+      <a name="contents">addr/data: 24 32
+32303130 30303030 d0a3230 30383030 30350d0a 32303039 30303033 d0a3230
+30613030 30310d0a 32303062 30303032 d0a3230 30633030 30330d0a 32303064
+30303034 d0a3230 30653132 33340d0a 32303066 35363738 d0a3031 30393530
+32300d0a 32323130 30303031 d0a3031 30393538 32310d0a 32323130 30303031
+d0a3031 30393630 32320d0a 32323130 30303031 d0a3031 30393638 32330d0a
+32323130 30303031 d0a3031 30393730 32340d0a 32323130 30303031 d0a3031
+30393738 32350d0a 32323130 30303031 d0a3031 30396330 32360d0a 32323130
+30303031 d0a3031 30396338 32370d0a 32323130 30303031 d0a3031 32383438
+32610d0a 32323130 30303031 d0a3031 30393530 32620d0a 32323130 30303031
+d0a3030 30383538 38300d0a 32323130 30303031 d0a3030 30383630 38320d0a
+32323130 30303031 d0a3030 30383638 38330d0a 32323130 30303031 d0a3031
+32383730 30340d0a 32323130 30303031 d0a3031 32383738 30360d0a 32323130
+30303031 d0a3031 32386330 30370d0a 32323130 30303031 d0a3031 30393030
+31380d0a 30303030 35303130 d0a3030 30303538 31320d0a 32323130 30303031
+d0a3031 30623030 31390d0a 30303030 35303130 d0a3030 30303538 31320d0a
+32323130 30303031 d0a3031 30393030 31610d0a 30303030 36303130 d0a3030
+30303638 31320d0a 32323130 30303031 d0a3031 30623030 31620d0a 30303030
+36303130 d0a3030 30303638 31320d0a 32323130 30303031 d0a3232 31303030
+30310d0a 32313065 30303061 d0a3232 31303030 30310d0a 32353266 30303134
+d0a3232 31303030 30310d0a 32393138 30303038 d0a3232 31303030 30310d0a
+32643339 30303034 d0a3232 31303030 30310d0a 33313061 30303066 d0a3232
+31303030 30310d0a 33353262 30303061 d0a3232 31303030 30310d0a 33393063
+30303037 d0a3232 31303030 30310d0a 33633064 31323334 d0a3232 31303030
+30310d0a 30313039 30303138 d0a3030 30303530 31300d0a 32323130 30303031
+d0a3031 30303030 31310d0a 32323130 30303031 d0a3030 30303538 31320d0a
+32323130 30303031 d0a3031 32303030 31330d0a 32323130 30303031 d0a6133
+61613030 30300d0a 38336165 30303030 d0a3232 31303030 30310d0a 61336161
+30303030 d0a3933 62393030 30300d0a 32323130 30303031 d0a6137 61653030
+30300d0a 38376166 30303030 d0a3232 31303030 30310d0a 61376165 30303030
+d0a3937 61383030 30300d0a 32323130 30303031 d0a6166 61383030 30300d0a
+38666238 30303030 d0a3232 31303030 30310d0a 61336139 30303030 d0a3232
+31303030 30310d0a 61376161 30303030 d0a3232 31303030 30310d0a 61666162
+30303030 d0a3232 31303030 30310d0a 31313038 30303031 d0a3030 30303030
+30300d0a 32323130 30303031 d0a3135 30393030 30310d0a 30303030 30303030
+d0a3232 31303030 30310d0a 31393030 30303031 d0a3030 30303030 30300d0a
+32323130 30303031 d0a3164 30303030 30310d0a 30303030 30303030 d0a3232
+31303030 30310d0a 32323130 30303031 d0a3038 31303030 37360d0a 32323130
+30303031 d0a3063 31303030 37620d0a 32323130 30303031 d0a3232 31303030
+30310d0a 30383130 30303761 d0a3031 30393130 32300d0a 32323130 30303031
+d0a3033 65303030 30380d0a
+</a>
+      <a name="dataWidth" val="32"/>
+      <a name="label" val="ROM_Memory"/>
+      <a name="labelvisible" val="true"/>
     </comp>
-    <comp loc="(1850,640)" name="cacheMips">
+    <comp loc="(370,360)" name="Cache_instrucciones">
       <a name="appearance" val="logisim_evolution"/>
     </comp>
-    <comp loc="(2250,650)" name="RAM_Module">
-      <a name="appearance" val="logisim_evolution"/>
-    </comp>
-    <wire from="(1400,680)" to="(1400,800)"/>
-    <wire from="(1400,680)" to="(1630,680)"/>
-    <wire from="(1400,800)" to="(2320,800)"/>
-    <wire from="(1530,660)" to="(1630,660)"/>
-    <wire from="(1540,640)" to="(1630,640)"/>
-    <wire from="(1570,720)" to="(1630,720)"/>
-    <wire from="(1600,700)" to="(1630,700)"/>
-    <wire from="(1850,640)" to="(1870,640)"/>
-    <wire from="(1850,660)" to="(1890,660)"/>
-    <wire from="(1850,680)" to="(1940,680)"/>
-    <wire from="(1850,700)" to="(1850,720)"/>
-    <wire from="(1850,720)" to="(2010,720)"/>
-    <wire from="(1870,610)" to="(1870,640)"/>
-    <wire from="(1870,610)" to="(1910,610)"/>
-    <wire from="(1940,680)" to="(1940,690)"/>
-    <wire from="(1940,690)" to="(2030,690)"/>
-    <wire from="(2010,710)" to="(2010,720)"/>
-    <wire from="(2010,710)" to="(2030,710)"/>
-    <wire from="(2020,590)" to="(2020,650)"/>
-    <wire from="(2020,650)" to="(2030,650)"/>
-    <wire from="(2240,650)" to="(2250,650)"/>
-    <wire from="(2250,650)" to="(2320,650)"/>
-    <wire from="(2320,650)" to="(2320,800)"/>
+    <wire from="(110,350)" to="(150,350)"/>
+    <wire from="(150,350)" to="(150,360)"/>
+    <wire from="(370,400)" to="(400,400)"/>
+    <wire from="(370,420)" to="(410,420)"/>
+    <wire from="(410,420)" to="(410,460)"/>
+    <wire from="(410,460)" to="(420,460)"/>
+    <wire from="(460,460)" to="(470,460)"/>
+    <wire from="(470,420)" to="(470,460)"/>
+    <wire from="(470,420)" to="(520,420)"/>
+    <wire from="(70,400)" to="(150,400)"/>
+    <wire from="(70,400)" to="(70,640)"/>
+    <wire from="(70,640)" to="(780,640)"/>
+    <wire from="(760,470)" to="(780,470)"/>
+    <wire from="(780,470)" to="(780,640)"/>
   </circuit>
   <vhdl name="cache">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -519,7 +551,9 @@ ENTITY cacheMips IS
 	hit : OUT std_logic; 
 	data: OUT std_logic_vector(31 DOWNTO 0);
 	miss: OUT std_logic; 
-	offset: OUT std_logic_vector(5 DOWNTO 0)
+	offset: OUT std_logic_vector(5 DOWNTO 0);
+	dirty: OUT std_logic; 
+	data_to_mem: OUT std_logic_vector(31 DOWNTO 0)
     );
 END cacheMips;
 
@@ -613,6 +647,10 @@ process (clock)
 				-- Add the tag to tags0 
 				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
 
+				if write_cache = '1' then 
+					dirtys0(to_integer(unsigned(s_index))) &lt;= '1';
+				end if; 
+				
 		elsif lru1(to_integer(unsigned(s_index))) = '0' and tags0(to_integer(unsigned(s_index))) /= s_tag then 
 				-- Use set 1 
 				valids1(to_integer(unsigned(s_index))) &lt;= '1';
@@ -625,7 +663,9 @@ process (clock)
 
 				-- Add the tag to tags1
 				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
-
+				if write_cache = '1' then 
+					dirtys1(to_integer(unsigned(s_index))) &lt;= '1';
+				end if; 
 		end if;
 	end if; 
 end process;
@@ -636,7 +676,8 @@ end process;
 	data &lt;= data_out;
 	miss &lt;= miss_out; 
 	offset &lt;= s_offset;
-
+	dirty &lt;= write_cache;
+	data_to_mem &lt;= entrada_dato;
 END TypeArchitecture;
 </vhdl>
   <vhdl name="ROM_MIPS">--------------------------------------------------------------------------------&#13;
@@ -725,12 +766,15 @@ ENTITY RAM_Module IS&#13;
   ------------------------------------------------------------------------------&#13;
   --Insert input ports below&#13;
 	clock: IN std_logic;
-    write : IN std_logic; 
+ 
     read: IN std_logic; 
-    offset: IN std_logic_vector(5 DOWNTO 0); 
+    offset: IN std_logic_vector(5 DOWNTO 0);
+    write : IN std_logic;
+    	data_to_write: IN std_logic_vector(31 DOWNTO 0); 
   ------------------------------------------------------------------------------&#13;
   --Insert output ports below&#13;
-    data        : OUT std_logic_vector(31 DOWNTO 0)                    -- output bit example&#13;
+    data        : OUT std_logic_vector(31 DOWNTO 0);  
+    data_show : OUT std_logic_vector(31 DOWNTO 0)-- output bit example&#13;
     );&#13;
 END RAM_Module;&#13;
 &#13;
@@ -752,8 +796,111 @@ begin
 		&#13;if read = '1' then
 			data &lt;= mainmem(to_integer(unsigned(offset))); 
 		end if;
+		if write = '1' then 
+			mainmem(to_integer(unsigned(offset))) &lt;= data_to_write; 
+		end if;
 	end if;  
 &#13;end process; 
+data_show &lt;= mainmem(to_integer(unsigned(offset)));
 END TypeArchitecture;&#13;
+</vhdl>
+  <vhdl name="Cache_instrucciones">--------------------------------------------------------------------------------
+-- Project :
+-- File    :
+-- Autor   :
+-- Date    :
+--
+--------------------------------------------------------------------------------
+-- Description :
+--
+ --128KB 
+-- Address are size 24
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;  
+
+
+ENTITY Cache_instrucciones IS
+  PORT (
+  ------------------------------------------------------------------------------
+  --Insert input ports below
+ 	clock      : IN  std_logic;           
+	Address: IN std_logic_vector(23 DOWNTO 0);
+  	Data_From_Mem: IN std_logic_vector(31 DOWNTO 0); 
+  ------------------------------------------------------------------------------
+	hit : OUT std_logic; 
+	miss: OUT std_logic; 
+	data: OUT std_logic_vector(31 DOWNTO 0);
+	offset: OUT std_logic_vector(5 DOWNTO 0)
+    );
+END Cache_instrucciones;
+
+
+ARCHITECTURE TypeArchitecture OF Cache_instrucciones IS
+-- Cache block definition: array of 2048 blocks of 32 bit words
+type t_bloque is array(0 to 63) of std_logic_vector(31 downto 0);
+type t_set is array(0 to 2048) of t_bloque;
+
+signal cache0 : t_set;
+type t_tag is array(0 to 2048) of std_logic_vector(6 downto 0);
+type t_valid is array(0 to 2048) of std_logic;
+
+signal valids0 : t_valid:= ( others =&gt; '0');
+signal tags0 : t_tag:=( others =&gt; "0000000");
+
+signal s_tag : std_logic_vector(23 DOWNTO 17);
+signal s_index :std_logic_vector (16 DOWNTO 6); 
+signal s_offset : std_logic_vector (5 DOWNTO 0); 
+
+-- Signal for miss and hit logic
+signal miss_out : std_logic; 
+signal hit_addr : std_logic;
+
+signal data_out: std_logic_vector(31 DOWNTO 0); 
+
+BEGIN
+-- Process that handles the cache behavior on clock edge
+process (clock)
+	begin
+	if clock = '1' then
+		-- Extracting tag, index, and offset from the address when clock is in its positive state 
+		s_tag    &lt;= Address(23 DOWNTO 17); 
+		s_index  &lt;= Address(16 DOWNTO 6); 
+		s_offset &lt;= Address(5 DOWNTO 0); 
+		-- Default values for hit and miss signals 
+		hit_addr &lt;= '0'; 
+		miss_out &lt;= '1'; 
+		data_out &lt;= x"00000000"; 
+		if valids0(to_integer(unsigned(s_index))) = '1' then 
+			if s_tag = tags0(to_integer(unsigned(s_index))) then 
+				-- If found, read data from cache memory
+				data_out &lt;= cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset)));
+				hit_addr &lt;= '1'; 
+				miss_out &lt;= '0';
+			end if; 
+		else
+			
+		 	hit_addr &lt;= '0'; 
+			miss_out &lt;= '1';
+			-- Miss, store data to cache 
+			valids0(to_integer(unsigned(s_index))) &lt;= '1';
+			-- Save data in cache0
+			cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= Data_From_Mem;
+			data_out &lt;= x"aaaabbbb";
+			-- Add the tag to tags0 
+			tags0(to_integer(unsigned(s_index))) &lt;= s_tag;	
+		end if; 
+	end if; 
+
+end process;
+hit &lt;= hit_addr; 
+miss &lt;= miss_out; 
+offset &lt;= s_offset;
+data &lt;= data_out; 
+
+END TypeArchitecture;
 </vhdl>
 </project>
