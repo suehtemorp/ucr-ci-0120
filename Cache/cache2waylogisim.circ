@@ -61,7 +61,7 @@
       <a name="appearance" val="NewPins"/>
       <a name="label" val="address"/>
       <a name="radix" val="16"/>
-      <a name="width" val="24"/>
+      <a name="width" val="30"/>
     </comp>
     <comp lib="0" loc="(370,360)" name="Pin">
       <a name="appearance" val="NewPins"/>
@@ -75,6 +75,20 @@
       <a name="label" val="miss"/>
       <a name="output" val="true"/>
     </comp>
+    <comp lib="0" loc="(390,490)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="radix" val="16"/>
+      <a name="width" val="13"/>
+    </comp>
+    <comp lib="0" loc="(390,520)" name="Pin">
+      <a name="appearance" val="NewPins"/>
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="radix" val="16"/>
+      <a name="width" val="13"/>
+    </comp>
     <comp lib="0" loc="(400,400)" name="Pin">
       <a name="appearance" val="NewPins"/>
       <a name="facing" val="west"/>
@@ -83,8 +97,8 @@
       <a name="radix" val="16"/>
       <a name="width" val="32"/>
     </comp>
-    <comp lib="0" loc="(460,460)" name="Bit Extender">
-      <a name="in_width" val="6"/>
+    <comp lib="0" loc="(460,450)" name="Bit Extender">
+      <a name="in_width" val="30"/>
       <a name="out_width" val="24"/>
       <a name="type" val="zero"/>
     </comp>
@@ -137,17 +151,18 @@ d0a3033 65303030 30380d0a
       <a name="label" val="ROM_Memory"/>
       <a name="labelvisible" val="true"/>
     </comp>
-    <comp loc="(370,360)" name="Cache_instrucciones">
-      <a name="appearance" val="logisim_evolution"/>
-    </comp>
     <wire from="(110,350)" to="(150,350)"/>
     <wire from="(150,350)" to="(150,360)"/>
     <wire from="(370,400)" to="(400,400)"/>
     <wire from="(370,420)" to="(410,420)"/>
-    <wire from="(410,420)" to="(410,460)"/>
-    <wire from="(410,460)" to="(420,460)"/>
-    <wire from="(460,460)" to="(470,460)"/>
-    <wire from="(470,420)" to="(470,460)"/>
+    <wire from="(370,440)" to="(390,440)"/>
+    <wire from="(370,460)" to="(370,520)"/>
+    <wire from="(370,520)" to="(390,520)"/>
+    <wire from="(390,440)" to="(390,490)"/>
+    <wire from="(410,420)" to="(410,450)"/>
+    <wire from="(410,450)" to="(420,450)"/>
+    <wire from="(460,450)" to="(470,450)"/>
+    <wire from="(470,420)" to="(470,450)"/>
     <wire from="(470,420)" to="(520,420)"/>
     <wire from="(70,400)" to="(150,400)"/>
     <wire from="(70,400)" to="(70,640)"/>
@@ -834,7 +849,9 @@ ENTITY Cache_instrucciones IS
 	hit : OUT std_logic; 
 	miss: OUT std_logic; 
 	data: OUT std_logic_vector(31 DOWNTO 0);
-	offset: OUT std_logic_vector(5 DOWNTO 0)
+	address_physical: OUT std_logic_vector(29 DOWNTO 0); 
+tag_out : OUT std_logic_vector(12 downto 0); 
+tag_from_cache : OUT std_logic_vector(12 DOWNTO 0)
     );
 END Cache_instrucciones;
 
@@ -849,7 +866,7 @@ type t_tag is array(0 to 2048) of std_logic_vector(12 downto 0);
 type t_valid is array(0 to 2048) of std_logic;
 
 signal valids0 : t_valid:= ( others =&gt; '0');
-signal tags0 : t_tag:=( others =&gt; "00000000000");
+signal tags0 : t_tag:=( "0000000000000", others =&gt; "0000000000000");
 
 signal s_tag : std_logic_vector(29 DOWNTO 17);
 signal s_index :std_logic_vector (16 DOWNTO 6); 
@@ -875,31 +892,35 @@ process (clock)
 		miss_out &lt;= '1'; 
 		data_out &lt;= x"00000000"; 
 		if valids0(to_integer(unsigned(s_index))) = '1' then 
+			data_out &lt;= x"11111111";
 			if s_tag = tags0(to_integer(unsigned(s_index))) then 
 				-- If found, read data from cache memory
-				data_out &lt;= cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset)));
+				data_out &lt;= cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index)));
 				hit_addr &lt;= '1'; 
 				miss_out &lt;= '0';
 			end if; 
-		else
-			
+
+		else 	
 		 	hit_addr &lt;= '0'; 
 			miss_out &lt;= '1';
 			-- Miss, store data to cache 
 			valids0(to_integer(unsigned(s_index))) &lt;= '1';
 			-- Save data in cache0
-			cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= Data_From_Mem;
+			cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_index))) &lt;= Data_From_Mem;
 			data_out &lt;= x"aaaabbbb";
 			-- Add the tag to tags0 
-			tags0(to_integer(unsigned(s_index))) &lt;= s_tag;	
-		end if; 
+			tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
+			--tag_from_cache &lt;= s_tag;
+			address_physical &lt;= Address;
+		end if;
 	end if; 
 
 end process;
 hit &lt;= hit_addr; 
 miss &lt;= miss_out; 
-offset &lt;= s_offset;
 data &lt;= data_out; 
+tag_out &lt;= s_tag;
+tag_from_cache &lt;= s_tag;
 
 END TypeArchitecture;
 </vhdl>
