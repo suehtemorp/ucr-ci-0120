@@ -814,7 +814,7 @@ END TypeArchitecture;&#13;
 -- Description :
 --
  --128KB 
--- Address are size 24
+-- Address are size 30
 --------------------------------------------------------------------------------
 
 LIBRARY ieee;
@@ -828,7 +828,7 @@ ENTITY Cache_instrucciones IS
   ------------------------------------------------------------------------------
   --Insert input ports below
  	clock      : IN  std_logic;           
-	Address: IN std_logic_vector(23 DOWNTO 0);
+	Address: IN std_logic_vector(29 DOWNTO 0);
   	Data_From_Mem: IN std_logic_vector(31 DOWNTO 0); 
   ------------------------------------------------------------------------------
 	hit : OUT std_logic; 
@@ -845,13 +845,13 @@ type t_bloque is array(0 to 63) of std_logic_vector(31 downto 0);
 type t_set is array(0 to 2048) of t_bloque;
 
 signal cache0 : t_set;
-type t_tag is array(0 to 2048) of std_logic_vector(6 downto 0);
+type t_tag is array(0 to 2048) of std_logic_vector(12 downto 0);
 type t_valid is array(0 to 2048) of std_logic;
 
 signal valids0 : t_valid:= ( others =&gt; '0');
-signal tags0 : t_tag:=( others =&gt; "0000000");
+signal tags0 : t_tag:=( others =&gt; "00000000000");
 
-signal s_tag : std_logic_vector(23 DOWNTO 17);
+signal s_tag : std_logic_vector(29 DOWNTO 17);
 signal s_index :std_logic_vector (16 DOWNTO 6); 
 signal s_offset : std_logic_vector (5 DOWNTO 0); 
 
@@ -867,7 +867,7 @@ process (clock)
 	begin
 	if clock = '1' then
 		-- Extracting tag, index, and offset from the address when clock is in its positive state 
-		s_tag    &lt;= Address(23 DOWNTO 17); 
+		s_tag    &lt;= Address(29 DOWNTO 17); 
 		s_index  &lt;= Address(16 DOWNTO 6); 
 		s_offset &lt;= Address(5 DOWNTO 0); 
 		-- Default values for hit and miss signals 
@@ -900,6 +900,158 @@ hit &lt;= hit_addr;
 miss &lt;= miss_out; 
 offset &lt;= s_offset;
 data &lt;= data_out; 
+
+END TypeArchitecture;
+</vhdl>
+  <vhdl name="Cache_datos">--------------------------------------------------------------------------------
+-- Description :
+-- Cache for pipelined MIPS processor. 
+-- 2 way associative.
+-- 32 bit addresses and 32 bit data output. 
+-- Address is divided this way: 
+--  tag is of 17 bits, index is of 8 bits and offset is 5 bits. 
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+USE ieee.numeric_std.all;  
+
+ENTITY Cache_datos IS
+  PORT (
+  ------------------------------------------------------------------------------
+  -- Input ports
+    clock      : IN  std_logic;           
+    Address: IN std_logic_vector(31 DOWNTO 0);
+
+  ------------------------------------------------------------------------------
+  -- Output ports
+	MIPS_Entrada
+    );
+END Cache_datos;
+
+--------------------------------------------------------------------------------
+-- Architecture of the cacheLRU entity
+--------------------------------------------------------------------------------
+
+ARCHITECTURE TypeArchitecture OF Cache_datos IS
+
+-- Cache block definition: array of 64 blocks of 20-bit words
+type bloque is array(0 to 63) of std_logic_vector(20 downto 0);
+
+-- Cache set definition: array of 256 cache blocks
+type t_set is array(0 to 255) of bloque;
+
+-- Two sets for the 2-way associative cache
+signal cache0 : t_set;
+signal cache1 : t_set; 
+
+-- Tag, valid, dirty, and LRU signal definitions
+type t_tag is array(0 to 255) of std_logic_vector(20 downto 0);
+type t_valid is array(0 to 255) of std_logic;
+type t_Dirty is array(0 to 255) of std_logic;
+type t_LRU is array(0 to 255) of std_logic; 
+
+-- Internal signals for tag, index, offset, and data
+signal s_tag : std_logic_vector(20 downto 0);
+signal s_index :std_logic_vector (4 DOWNTO 0); 
+signal s_offset : std_logic_vector (5 DOWNTO 0); 
+signal data: std_logic_vector(31 DOWNTO 0); 
+signal hit_addr : std_logic;
+
+-- Main memory definition: array of 32 words of 32 bits
+type t_Memory is array (0 to 31) of std_logic_vector(31 downto 0);
+signal mainmem : t_Memory:= ("00000000000000000000000000000001",others =&gt;"00000000000000000000000000100000");
+
+-- Signals for dirty, valid, tag, and LRU bits for both cache sets
+signal dirtys0 : t_Dirty:= ( others =&gt; '0');
+signal valids0 : t_valid:= ( others =&gt; '0');
+signal tags0 : t_tag:=( others =&gt; "000000000000000000000");
+signal lru0: t_LRU:=(others =&gt; '0'); 
+
+signal dirtys1 : t_Dirty:= ( others =&gt; '0');
+signal valids1 : t_valid:= (others =&gt; '0');
+signal tags1 : t_tag:=( others =&gt; "000000000000000000000");
+signal lru1: t_LRU:=(others =&gt; '1'); 
+
+-- Signal for miss logic
+signal miss : std_logic; 
+
+signal set_0_out: std_logic;
+signal set_1_out : std_logic; 
+
+
+
+BEGIN
+-- Process that handles the cache behavior on clock edge
+process (clock)
+	begin
+	if clock = '1' then
+	-- Extracting tag, index, and offset from the address when clock is in its positive state 
+		s_tag &lt;= Address(31 DOWNTO 11); 
+		s_index &lt;= Address(10  DOWNTO 6); 
+		s_offset &lt;= Address(5  DOWNTO 0); 
+		-- Default values for hit and miss signals 
+		hit_addr &lt;= '0'; 
+		miss &lt;= '1'; 
+
+		-- Check if the address is in the cache (this is when valid bit and tag match) 
+		if valids0(to_integer(unsigned(s_index))) = '1' or valids1(to_integer(unsigned(s_index))) = '1' then 
+			if s_tag = tags0(to_integer(unsigned(s_index))) or s_tag = tags1(to_integer(unsigned(s_index))) then 
+				-- If found, read data from main memory
+				data &lt;= mainmem(to_integer(unsigned(s_offset))); 
+				hit_addr &lt;= '1'; 
+				miss &lt;= '0';
+			end if; 
+		end if; 
+		-- Determine which set to used based on LRU bit. Check if the tag is not stored already in the cache 
+		if lru0(to_integer(unsigned(s_index))) = '0'and tags1(to_integer(unsigned(s_index))) /= s_tag  then 
+
+				-- Use set 0 
+				valids0(to_integer(unsigned(s_index))) &lt;= '1';
+				
+				-- Actual lru_0 bit changes to '1' and the other lru_1 bit changes to '0' in the index from address.  
+				lru0(to_integer(unsigned(s_index))) &lt;= '1'; 
+				lru1(to_integer(unsigned(s_index))) &lt;= '0';
+				
+				-- Save tag in cache0
+				cache0(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= s_tag;
+
+				-- Add the tag to tags0 
+				tags0(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+		
+				set_1_out &lt;= '0'; 
+				set_0_out &lt;= '1';
+		elsif lru1(to_integer(unsigned(s_index))) = '0' and tags0(to_integer(unsigned(s_index))) /= s_tag then 
+				-- Use set 1 
+				valids1(to_integer(unsigned(s_index))) &lt;= '1';
+				
+				-- Actual lru_1 bit changes to '1' and the other lru_0 bit changes to '0' in the index from address.  
+				lru1(to_integer(unsigned(s_index))) &lt;= '1'; 
+				lru0(to_integer(unsigned(s_index))) &lt;= '0'; 
+				-- Save tag in cache1
+				cache1(to_integer(unsigned(s_index)))(to_integer(unsigned(s_offset))) &lt;= s_tag;
+
+				-- Add the tag to tags1
+				tags1(to_integer(unsigned(s_index))) &lt;= s_tag;
+
+
+				set_1_out &lt;= '1'; 
+				set_0_out &lt;= '0'; 
+		end if;
+	end if; 
+end process;
+
+	-- Assign internal signals to output ports 
+	tag_out &lt;= s_tag; 
+	index_out &lt;= s_index;
+	offset_out &lt;= s_offset;
+	hit &lt;= hit_addr; 
+	data_out &lt;= data;
+	miss_out &lt;= miss; 
+	set_0 &lt;= set_0_out; 
+	set_1 &lt;= set_1_out;
 
 END TypeArchitecture;
 </vhdl>
