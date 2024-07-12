@@ -4141,11 +4141,6 @@
       <a name="value" val="0x0"/>
       <a name="width" val="5"/>
     </comp>
-    <comp lib="0" loc="(1150,1330)" name="Constant">
-      <a name="facing" val="north"/>
-      <a name="value" val="0x0"/>
-      <a name="width" val="5"/>
-    </comp>
     <comp lib="0" loc="(1200,820)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="label" val="J_JAL"/>
