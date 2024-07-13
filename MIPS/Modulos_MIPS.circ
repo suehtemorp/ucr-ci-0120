@@ -14814,14 +14814,6 @@ BEGIN&#13;
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -14892,14 +14884,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -14970,14 +14954,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -15048,14 +15024,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -15126,14 +15094,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -15204,14 +15164,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -15282,14 +15234,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
@@ -15360,14 +15304,6 @@ BEGIN
 			Leido &lt;= (0 =&gt; '0', others =&gt; '0');
 		-- Actualizaciones de flanco creciente
 		elsif rising_edge(Reloj) then
-			if (Bloquear = '1') then
-				report "Block";
-			end if;
-			if (Bloqueo_Previo = '1') then
-				report "Block Previo";
-			end if;
-			report "-----";
-
 			-- Actualizar cola de datos
 			if (Bloquear = '0') then
 				Escrito_B := Escrito_A;
