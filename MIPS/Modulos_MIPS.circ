@@ -14612,7 +14612,7 @@ END MIPS_Control_Hazard_Solver;&#13;
 &#13;
 ARCHITECTURE Solver_Implementation OF MIPS_Control_Hazard_Solver IS&#13;
 	-- Posibles estados para el proceso de mitigación
-	type T_Estado is (NORMAL, MITIGAR_JUMP, MITIGAR_LOAD_A, MITIGAR_LOAD_B);
+	type T_Estado is (NORMAL, MITIGAR_JUMP, MITIGAR_LOAD_A, MITIGAR_LOAD_B, MITIGAR_LOAD_C);
 BEGIN&#13;
 	process(Primer_ciclo, EX_Salto_Pendiente, ID_Bitmap_Accesos, Reloj)
 		-- El estado actual del proceso de mitigación
@@ -14728,6 +14728,25 @@ BEGIN&#13;
 				IF_Reiniciar &lt;= '0';
 				ID_Reiniciar &lt;= '0';
 				EX_Reiniciar &lt;= '1';
+				MEM_Reiniciar &lt;= '0';
+				WB_Reiniciar &lt;= '0';
+				
+				-- Mantendremos las fases fijas para el siguiente ciclo
+				IF_Dormir &lt;= '1';
+				ID_Dormir &lt;= '1';
+				EX_Dormir &lt;= '1';
+				MEM_Dormir &lt;= '0';
+				WB_Dormir &lt;= '0';
+
+				-- El siguiente ciclo nos queda pendiente mitigar el hazard
+				Estado := MITIGAR_LOAD_C;
+
+			-- Con suficiente tiempo, quitaremos el reinicio asincrónico para el siguiente flanco
+			elsif (Estado = MITIGAR_LOAD_C) then
+				-- No es necesario anular fases antes del siguiente ciclo
+				IF_Reiniciar &lt;= '0';
+				ID_Reiniciar &lt;= '0';
+				EX_Reiniciar &lt;= '0';
 				MEM_Reiniciar &lt;= '0';
 				WB_Reiniciar &lt;= '0';
 				
